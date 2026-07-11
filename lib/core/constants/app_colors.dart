@@ -37,6 +37,12 @@ class AppColors {
   static const Color tax = Color(0xFFFFC107);
   static const Color business = Color(0xFFCE93D8);
   static const Color utility = Color(0xFF64FFDA);
+  static const Color banking = Color(0xFF4FC3F7);
+  static const Color insurance = Color(0xFFFF8A65);
+  static const Color retirement = Color(0xFF90CAF9);
+  static const Color realEstate = Color(0xFFA5D6A7);
+  static const Color stockMarket = Color(0xFFE1BEE7);
+  static const Color crypto = Color(0xFFFFD54F);
 
   // Chart Colors
   static const List<Color> chartColors = [
@@ -46,6 +52,12 @@ class AppColors {
     Color(0xFFCE93D8),
     Color(0xFFFF6B6B),
     Color(0xFFFFC107),
+    Color(0xFF4FC3F7),
+    Color(0xFFFF8A65),
+    Color(0xFF90CAF9),
+    Color(0xFFA5D6A7),
+    Color(0xFFE1BEE7),
+    Color(0xFFFFD54F),
   ];
 
   // Gradient

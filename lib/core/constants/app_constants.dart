@@ -56,6 +56,12 @@ class AppConstants {
   static const String catTax = 'Tax';
   static const String catBusiness = 'Business';
   static const String catUtility = 'Utility';
+  static const String catBanking = 'Banking';
+  static const String catInsurance = 'Insurance';
+  static const String catRetirement = 'Retirement';
+  static const String catRealEstate = 'Real Estate';
+  static const String catStockMarket = 'Stock Market';
+  static const String catCrypto = 'Crypto';
 
   // Currency List
   static const List<Map<String, String>> currencies = [

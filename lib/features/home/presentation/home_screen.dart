@@ -622,6 +622,12 @@ class _CategorySection extends ConsumerWidget {
       'Tax': '/tax',
       'Business': '/business',
       'Utility': '/utility',
+      'Banking': '/banking',
+      'Insurance': '/insurance',
+      'Retirement': '/retirement',
+      'Real Estate': '/real-estate',
+      'Stock Market': '/stock-market',
+      'Crypto': '/crypto',
     };
     final route = routes[category.name];
     if (route != null) context.push(route);
