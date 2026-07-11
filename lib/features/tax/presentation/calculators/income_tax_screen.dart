@@ -272,9 +272,9 @@ class _IncomeTaxScreenState extends CalculatorBaseState<IncomeTaxScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.tax.withOpacity(0.08),
+              color: AppColors.tax.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.tax.withOpacity(0.3)),
+              border: Border.all(color: AppColors.tax.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [
@@ -386,11 +386,11 @@ class _IncomeTaxScreenState extends CalculatorBaseState<IncomeTaxScreen> {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: (chosenSaves ? AppColors.error : AppColors.success)
-                  .withOpacity(0.08),
+                  .withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
                 color: (chosenSaves ? AppColors.error : AppColors.success)
-                    .withOpacity(0.3),
+                    .withValues(alpha: 0.3),
               ),
             ),
             child: Row(
@@ -469,7 +469,7 @@ class _RegimeToggleBtn extends StatelessWidget {
           margin: const EdgeInsets.all(4),
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: selected ? AppColors.tax.withOpacity(0.15) : Colors.transparent,
+            color: selected ? AppColors.tax.withValues(alpha: 0.15) : Colors.transparent,
             borderRadius: BorderRadius.circular(10),
             border: selected ? Border.all(color: AppColors.tax, width: 1.5) : null,
           ),
@@ -488,7 +488,7 @@ class _RegimeToggleBtn extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 10,
                   color: selected
-                      ? AppColors.tax.withOpacity(0.7)
+                      ? AppColors.tax.withValues(alpha: 0.7)
                       : AppColors.textHint,
                 ),
               ),
@@ -519,11 +519,11 @@ class _RegimeCompareCard extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: isSelected
-            ? AppColors.tax.withOpacity(0.08)
+            ? AppColors.tax.withValues(alpha: 0.08)
             : AppColors.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isSelected ? AppColors.tax.withOpacity(0.3) : AppColors.border,
+          color: isSelected ? AppColors.tax.withValues(alpha: 0.3) : AppColors.border,
           width: isSelected ? 1.5 : 1,
         ),
       ),
@@ -543,7 +543,7 @@ class _RegimeCompareCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: AppColors.tax.withOpacity(0.15),
+                color: AppColors.tax.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: const Text(

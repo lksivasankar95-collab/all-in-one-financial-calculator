@@ -430,7 +430,7 @@ class _EmiScreenState extends CalculatorBaseState<EmiScreen> {
                     PieChartData(
                       sectionsSpace: 3,
                       centerSpaceRadius: 52,
-                      touchData: PieTouchData(
+                      pieTouchData: PieTouchData(
                         touchCallback: (event, response) {
                           setState(() {
                             if (!event.isInterestedForInteractions ||
@@ -460,7 +460,7 @@ class _EmiScreenState extends CalculatorBaseState<EmiScreen> {
                         ),
                         PieChartSectionData(
                           value: r.totalInterest,
-                          color: AppColors.error.withOpacity(0.75),
+                          color: AppColors.error.withValues(alpha: 0.75),
                           title: _touchedIndex == 1
                               ? '${interestPct.toStringAsFixed(1)}%'
                               : '',
@@ -487,7 +487,7 @@ class _EmiScreenState extends CalculatorBaseState<EmiScreen> {
                     ),
                     const SizedBox(height: 14),
                     _PieLegend(
-                      color: AppColors.error.withOpacity(0.75),
+                      color: AppColors.error.withValues(alpha: 0.75),
                       label: 'Interest',
                       value: '${interestPct.toStringAsFixed(1)}%',
                     ),
@@ -576,7 +576,7 @@ class _EmiScreenState extends CalculatorBaseState<EmiScreen> {
               return DataRow(
                 color: WidgetStateProperty.resolveWith<Color?>((states) {
                   if (row.month % 2 == 0) {
-                    return AppColors.card.withOpacity(0.5);
+                    return AppColors.card.withValues(alpha: 0.5);
                   }
                   return null;
                 }),
@@ -661,10 +661,10 @@ class _ToggleChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           color:
-              selected ? AppColors.loan.withOpacity(0.2) : Colors.transparent,
+              selected ? AppColors.loan.withValues(alpha: 0.2) : Colors.transparent,
           borderRadius: BorderRadius.circular(7),
           border: selected
-              ? Border.all(color: AppColors.loan.withOpacity(0.5))
+              ? Border.all(color: AppColors.loan.withValues(alpha: 0.5))
               : null,
         ),
         child: Text(

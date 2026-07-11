@@ -152,10 +152,10 @@ class _DateDifferenceScreenState
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppColors.utility.withOpacity(0.12),
+                        color: AppColors.utility.withValues(alpha: 0.12),
                         shape: BoxShape.circle,
                         border: Border.all(
-                            color: AppColors.utility.withOpacity(0.3)),
+                            color: AppColors.utility.withValues(alpha: 0.3)),
                       ),
                       child: const Icon(
                         Icons.swap_vert_rounded,
@@ -218,9 +218,9 @@ class _DateDifferenceScreenState
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.utility.withOpacity(0.08),
+              color: AppColors.utility.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.utility.withOpacity(0.3)),
+              border: Border.all(color: AppColors.utility.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [
@@ -250,7 +250,7 @@ class _DateDifferenceScreenState
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: AppColors.warning.withOpacity(0.12),
+                      color: AppColors.warning.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: const Text(

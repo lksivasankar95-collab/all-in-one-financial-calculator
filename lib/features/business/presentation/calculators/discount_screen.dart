@@ -176,10 +176,10 @@ class _DiscountScreenState extends CalculatorBaseState<DiscountScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: AppColors.business.withOpacity(0.1),
+                            color: AppColors.business.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
-                                color: AppColors.business.withOpacity(0.3)),
+                                color: AppColors.business.withValues(alpha: 0.3)),
                           ),
                           child: Text(
                             '${_discountPercent.toStringAsFixed(0)}%',
@@ -204,9 +204,9 @@ class _DiscountScreenState extends CalculatorBaseState<DiscountScreen> {
                         _reverseResult = null;
                       }),
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text('1%',
                             style: TextStyle(
                                 fontSize: 11, color: AppColors.textHint)),
@@ -313,9 +313,9 @@ class _DiscountScreenState extends CalculatorBaseState<DiscountScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.business.withOpacity(0.08),
+              color: AppColors.business.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.business.withOpacity(0.3)),
+              border: Border.all(color: AppColors.business.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [

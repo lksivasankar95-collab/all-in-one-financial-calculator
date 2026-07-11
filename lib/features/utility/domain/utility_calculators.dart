@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:ui' show Color;
 
 class UtilityCalculators {
   UtilityCalculators._();
@@ -267,6 +268,249 @@ class UtilityCalculators {
     final sqMetres = v * (_areaToSqMetre[from] ?? 1.0);
     return sqMetres / (_areaToSqMetre[to] ?? 1.0);
   }
+
+  // ─── BMI ─────────────────────────────────────────────────────────────────────
+
+  static BmiResult calculateBmi({
+    required double weightKg,
+    required double heightCm,
+  }) {
+    final heightM = heightCm / 100;
+    final bmi = weightKg / (heightM * heightM);
+    final healthyMin = 18.5 * heightM * heightM;
+    final healthyMax = 24.9 * heightM * heightM;
+
+    String category;
+    Color categoryColor;
+    String risk;
+
+    if (bmi < 18.5) {
+      category = 'Underweight';
+      categoryColor = const Color(0xFF40C4FF);
+      risk = 'You may be at risk of nutritional deficiencies and weakened immune function.';
+    } else if (bmi < 25) {
+      category = 'Normal';
+      categoryColor = const Color(0xFF39FF14);
+      risk = 'You are at a healthy weight for your height. Keep maintaining a balanced diet!';
+    } else if (bmi < 30) {
+      category = 'Overweight';
+      categoryColor = const Color(0xFFFFC107);
+      risk = 'You may be at risk of heart disease, high blood pressure, and diabetes.';
+    } else {
+      category = 'Obese';
+      categoryColor = const Color(0xFFFF5252);
+      risk = 'You are at high risk of serious health conditions. Consult a healthcare professional.';
+    }
+
+    return BmiResult(
+      bmi: bmi,
+      category: category,
+      categoryColor: categoryColor,
+      healthyWeightMin: healthyMin,
+      healthyWeightMax: healthyMax,
+      risk: risk,
+    );
+  }
+
+  // ─── Fuel Cost ───────────────────────────────────────────────────────────────
+
+  static FuelCostResult calculateFuelCost({
+    required double distanceKm,
+    required double mileageKmpl,
+    required double fuelPricePerLiter,
+    required double averageSpeedKmph,
+  }) {
+    final fuelRequired = distanceKm / mileageKmpl;
+    final totalFuelCost = fuelRequired * fuelPricePerLiter;
+    final costPerKm = fuelPricePerLiter / mileageKmpl;
+    final tripDuration = distanceKm / averageSpeedKmph;
+
+    return FuelCostResult(
+      distance: distanceKm,
+      mileage: mileageKmpl,
+      fuelPrice: fuelPricePerLiter,
+      fuelRequired: fuelRequired,
+      totalFuelCost: totalFuelCost,
+      costPerKm: costPerKm,
+      tripDuration: tripDuration,
+    );
+  }
+
+  // ─── Electricity Bill ────────────────────────────────────────────────────────
+
+  static const List<ElectricitySlab> defaultSlabs = [
+    ElectricitySlab(maxUnits: 100, ratePerUnit: 3.0),
+    ElectricitySlab(maxUnits: 200, ratePerUnit: 4.5),
+    ElectricitySlab(maxUnits: 300, ratePerUnit: 6.0),
+    ElectricitySlab(maxUnits: 500, ratePerUnit: 7.5),
+    ElectricitySlab(maxUnits: 999999, ratePerUnit: 9.0),
+  ];
+
+  static ElectricityResult calculateElectricityBill({
+    required int unitsConsumed,
+    required List<ElectricitySlab> slabs,
+    required double fixedCharges,
+  }) {
+    final details = <SlabDetail>[];
+    int remaining = unitsConsumed;
+    double totalEnergyCharges = 0;
+
+    for (int i = 0; i < slabs.length; i++) {
+      final slab = slabs[i];
+      final prevMax = i > 0 ? slabs[i - 1].maxUnits : 0;
+      final slabUnits = slab.maxUnits - prevMax;
+
+      final unitsInSlab = remaining > slabUnits ? slabUnits : remaining;
+      if (unitsInSlab <= 0) break;
+
+      final amount = unitsInSlab * slab.ratePerUnit;
+      final slabLabel = i == slabs.length - 1
+          ? '> ${slabs[i - 1].maxUnits}'
+          : '${prevMax + 1}-${slab.maxUnits}';
+
+      details.add(SlabDetail(
+        slab: slabLabel,
+        units: unitsInSlab.toDouble(),
+        rate: slab.ratePerUnit,
+        amount: amount,
+      ));
+
+      totalEnergyCharges += amount;
+      remaining -= unitsInSlab;
+    }
+
+    final totalBill = totalEnergyCharges + fixedCharges;
+    final avgRate = unitsConsumed > 0
+        ? totalEnergyCharges / unitsConsumed
+        : 0.0;
+
+    return ElectricityResult(
+      unitsConsumed: unitsConsumed.toDouble(),
+      slabDetails: details,
+      fixedCharges: fixedCharges,
+      totalBill: totalBill,
+      averageRatePerUnit: avgRate,
+    );
+  }
+
+  // ─── Tip ─────────────────────────────────────────────────────────────────────
+
+  static TipResult calculateTip({
+    required double billAmount,
+    required double tipPercent,
+    required int splitCount,
+  }) {
+    final tipAmount = billAmount * tipPercent / 100;
+    final totalAmount = billAmount + tipAmount;
+    final perPersonAmount = totalAmount / splitCount;
+
+    return TipResult(
+      billAmount: billAmount,
+      tipPercent: tipPercent,
+      tipAmount: tipAmount,
+      totalAmount: totalAmount,
+      perPersonAmount: perPersonAmount,
+    );
+  }
+
+  // ─── Split Bill ──────────────────────────────────────────────────────────────
+
+  static SplitBillResult calculateSplitBill({
+    required double billAmount,
+    required double tipPercent,
+    required double taxPercent,
+    required int peopleCount,
+  }) {
+    final tipAmount = billAmount * tipPercent / 100;
+    final taxAmount = billAmount * taxPercent / 100;
+    final grandTotal = billAmount + tipAmount + taxAmount;
+    final perPersonAmount = grandTotal / peopleCount;
+
+    final shares = List.generate(
+      peopleCount,
+      (i) => PersonShare(
+        name: 'Person ${i + 1}',
+        amount: perPersonAmount,
+        percentage: 100.0 / peopleCount,
+      ),
+    );
+
+    return SplitBillResult(
+      totalAmount: billAmount,
+      tipAmount: tipAmount,
+      taxAmount: taxAmount,
+      grandTotal: grandTotal,
+      perPersonAmount: perPersonAmount,
+      shares: shares,
+    );
+  }
+
+  // ─── Percent Change ──────────────────────────────────────────────────────────
+
+  static PercentChangeResult calculatePercentChange({
+    required double oldValue,
+    required double newValue,
+  }) {
+    final change = newValue - oldValue;
+    final percentChange = oldValue != 0 ? (change / oldValue) * 100 : 0.0;
+    final changeType = change > 0
+        ? 'increase'
+        : change < 0
+            ? 'decrease'
+            : 'no change';
+
+    return PercentChangeResult(
+      oldValue: oldValue,
+      newValue: newValue,
+      change: change,
+      percentChange: percentChange,
+      changeType: changeType,
+    );
+  }
+
+  static PercentChangeResult calculateNewValue({
+    required double oldValue,
+    required double percentChange,
+  }) {
+    final change = oldValue * percentChange / 100;
+    final newValue = oldValue + change;
+    final changeType = change > 0
+        ? 'increase'
+        : change < 0
+            ? 'decrease'
+            : 'no change';
+
+    return PercentChangeResult(
+      oldValue: oldValue,
+      newValue: newValue,
+      change: change,
+      percentChange: percentChange,
+      changeType: changeType,
+    );
+  }
+
+  static PercentChangeResult calculateOriginalValue({
+    required double newValue,
+    required double percentChange,
+  }) {
+    final oldValue = percentChange != -100
+        ? newValue / (1 + percentChange / 100)
+        : 0.0;
+    final change = newValue - oldValue;
+    final changeType = change > 0
+        ? 'increase'
+        : change < 0
+            ? 'decrease'
+            : 'no change';
+
+    return PercentChangeResult(
+      oldValue: oldValue,
+      newValue: newValue,
+      change: change,
+      percentChange: percentChange,
+      changeType: changeType,
+    );
+  }
 }
 
 // ─── Enums & Result Classes ───────────────────────────────────────────────────
@@ -329,5 +573,154 @@ class DateDiffResult {
     required this.years,
     required this.months,
     required this.days,
+  });
+}
+
+// ─── BMI Calculator ───────────────────────────────────────────────────────────
+
+class BmiResult {
+  final double bmi;
+  final String category;
+  final Color categoryColor;
+  final double healthyWeightMin;
+  final double healthyWeightMax;
+  final String risk;
+
+  const BmiResult({
+    required this.bmi,
+    required this.category,
+    required this.categoryColor,
+    required this.healthyWeightMin,
+    required this.healthyWeightMax,
+    required this.risk,
+  });
+}
+
+// ─── Fuel Cost Calculator ─────────────────────────────────────────────────────
+
+class FuelCostResult {
+  final double distance;
+  final double mileage;
+  final double fuelPrice;
+  final double fuelRequired;
+  final double totalFuelCost;
+  final double costPerKm;
+  final double tripDuration;
+
+  const FuelCostResult({
+    required this.distance,
+    required this.mileage,
+    required this.fuelPrice,
+    required this.fuelRequired,
+    required this.totalFuelCost,
+    required this.costPerKm,
+    required this.tripDuration,
+  });
+}
+
+// ─── Electricity Bill Calculator ──────────────────────────────────────────────
+
+class ElectricitySlab {
+  final int maxUnits;
+  final double ratePerUnit;
+
+  const ElectricitySlab({required this.maxUnits, required this.ratePerUnit});
+}
+
+class SlabDetail {
+  final String slab;
+  final double units;
+  final double rate;
+  final double amount;
+
+  const SlabDetail({
+    required this.slab,
+    required this.units,
+    required this.rate,
+    required this.amount,
+  });
+}
+
+class ElectricityResult {
+  final double unitsConsumed;
+  final List<SlabDetail> slabDetails;
+  final double fixedCharges;
+  final double totalBill;
+  final double averageRatePerUnit;
+
+  const ElectricityResult({
+    required this.unitsConsumed,
+    required this.slabDetails,
+    required this.fixedCharges,
+    required this.totalBill,
+    required this.averageRatePerUnit,
+  });
+}
+
+// ─── Tip Calculator ───────────────────────────────────────────────────────────
+
+class TipResult {
+  final double billAmount;
+  final double tipPercent;
+  final double tipAmount;
+  final double totalAmount;
+  final double perPersonAmount;
+
+  const TipResult({
+    required this.billAmount,
+    required this.tipPercent,
+    required this.tipAmount,
+    required this.totalAmount,
+    required this.perPersonAmount,
+  });
+}
+
+// ─── Split Bill Calculator ────────────────────────────────────────────────────
+
+class PersonShare {
+  final String name;
+  final double amount;
+  final double percentage;
+
+  const PersonShare({
+    required this.name,
+    required this.amount,
+    required this.percentage,
+  });
+}
+
+class SplitBillResult {
+  final double totalAmount;
+  final double tipAmount;
+  final double taxAmount;
+  final double grandTotal;
+  final double perPersonAmount;
+  final List<PersonShare> shares;
+
+  const SplitBillResult({
+    required this.totalAmount,
+    required this.tipAmount,
+    required this.taxAmount,
+    required this.grandTotal,
+    required this.perPersonAmount,
+    required this.shares,
+  });
+}
+
+// ─── Percent Change Calculator ────────────────────────────────────────────────
+
+class PercentChangeResult {
+  final double oldValue;
+  final double newValue;
+  final double change;
+  final double percentChange;
+  final String changeType;
+
+  const PercentChangeResult({
+    required this.oldValue,
+    required this.newValue,
+    required this.change,
+    required this.percentChange,
+    required this.changeType,
   });
 }

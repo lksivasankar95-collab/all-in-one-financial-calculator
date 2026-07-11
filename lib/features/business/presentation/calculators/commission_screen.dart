@@ -149,10 +149,10 @@ class _CommissionScreenState extends CalculatorBaseState<CommissionScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
-                              color: AppColors.business.withOpacity(0.1),
+                              color: AppColors.business.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(
-                                  color: AppColors.business.withOpacity(0.3)),
+                                  color: AppColors.business.withValues(alpha: 0.3)),
                             ),
                             child: Text(
                               '${_commissionRate.toStringAsFixed(1)}%',
@@ -176,9 +176,9 @@ class _CommissionScreenState extends CalculatorBaseState<CommissionScreen> {
                           _result = null;
                         }),
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text('0.5%',
                               style: TextStyle(
                                   fontSize: 11, color: AppColors.textHint)),
@@ -254,9 +254,9 @@ class _CommissionScreenState extends CalculatorBaseState<CommissionScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.business.withOpacity(0.08),
+              color: AppColors.business.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.business.withOpacity(0.3)),
+              border: Border.all(color: AppColors.business.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [

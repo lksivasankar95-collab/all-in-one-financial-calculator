@@ -135,10 +135,10 @@ class _FavoriteCard extends ConsumerWidget {
         decoration: BoxDecoration(
           color: AppColors.card,
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: color.withOpacity(0.25)),
+          border: Border.all(color: color.withValues(alpha: 0.25)),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.06),
+              color: color.withValues(alpha: 0.06),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -156,7 +156,7 @@ class _FavoriteCard extends ConsumerWidget {
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
                     colors: [
-                      color.withOpacity(0.12),
+                      color.withValues(alpha: 0.12),
                       Colors.transparent,
                     ],
                   ),
@@ -179,10 +179,10 @@ class _FavoriteCard extends ConsumerWidget {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: color.withOpacity(0.15),
+                          color: color.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                           border:
-                              Border.all(color: color.withOpacity(0.3)),
+                              Border.all(color: color.withValues(alpha: 0.3)),
                         ),
                         child: Icon(item.icon, color: color, size: 24),
                       ),
@@ -209,10 +209,10 @@ class _FavoriteCard extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.1),
+                      color: color.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(6),
                       border:
-                          Border.all(color: color.withOpacity(0.25)),
+                          Border.all(color: color.withValues(alpha: 0.25)),
                     ),
                     child: Text(
                       item.category,
@@ -248,9 +248,9 @@ class _RemoveFavoriteButton extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-          color: AppColors.error.withOpacity(0.1),
+          color: AppColors.error.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: AppColors.error.withOpacity(0.25)),
+          border: Border.all(color: AppColors.error.withValues(alpha: 0.25)),
         ),
         child: const Icon(
           Icons.favorite_rounded,

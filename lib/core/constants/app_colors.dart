@@ -69,11 +69,11 @@ class AppColors {
 
   // Glow effects
   static List<BoxShadow> neonGlow(Color color, {double blur = 12, double spread = 0}) => [
-    BoxShadow(color: color.withOpacity(0.4), blurRadius: blur, spreadRadius: spread),
-    BoxShadow(color: color.withOpacity(0.2), blurRadius: blur * 2, spreadRadius: spread),
+    BoxShadow(color: color.withValues(alpha: 0.4), blurRadius: blur, spreadRadius: spread),
+    BoxShadow(color: color.withValues(alpha: 0.2), blurRadius: blur * 2, spreadRadius: spread),
   ];
 
   static List<BoxShadow> get cardShadow => [
-    BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 12, offset: const Offset(0, 4)),
+    BoxShadow(color: Colors.black.withValues(alpha: 0.5), blurRadius: 12, offset: const Offset(0, 4)),
   ];
 }

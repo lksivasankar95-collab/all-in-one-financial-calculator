@@ -258,6 +258,138 @@ class SavingsCalculators {
       monthsToAchieve: monthsToAchieve,
     );
   }
+
+  // ─── Goal Savings ─────────────────────────────────────────────────────────
+  /// PMT = (FV - PV*(1+r)^t) / (((1+r)^t - 1)/r)
+  static GoalSavingsResult calculateGoalSavings({
+    required double goalAmount,
+    required double currentSavings,
+    required double annualReturn,
+    required int years,
+  }) {
+    final int n = years * 12;
+    final double r = annualReturn / 1200;
+
+    final double fvCurrentSavings = currentSavings * pow(1 + r, n);
+    final double shortfall = (goalAmount - fvCurrentSavings).clamp(0, double.infinity);
+
+    double monthlySavingsNeeded;
+    if (shortfall <= 0 || r <= 0) {
+      monthlySavingsNeeded = 0;
+    } else {
+      monthlySavingsNeeded = shortfall / ((pow(1 + r, n) - 1) / r);
+    }
+
+    final double totalContributions = monthlySavingsNeeded * n;
+    final double totalInterest = goalAmount - currentSavings - totalContributions;
+
+    return GoalSavingsResult(
+      monthlySavingsNeeded: monthlySavingsNeeded,
+      totalContributions: totalContributions,
+      totalInterest: totalInterest,
+      goalAmount: goalAmount,
+    );
+  }
+
+  // ─── Monthly Savings ──────────────────────────────────────────────────────
+  /// FV of annuity due: monthlyAmount * (((1+r)^n - 1) / r) * (1+r)
+  static MonthlySavingsResult calculateMonthlySavings({
+    required double monthlyAmount,
+    required double annualReturn,
+    required int years,
+  }) {
+    final int n = years * 12;
+    final double r = annualReturn / 1200;
+
+    double totalAfterYears;
+    if (r <= 0) {
+      totalAfterYears = monthlyAmount * n;
+    } else {
+      totalAfterYears = monthlyAmount * (((pow(1 + r, n) - 1) / r) * (1 + r));
+    }
+
+    final double totalContributions = monthlyAmount * n;
+    final double totalInterest = totalAfterYears - totalContributions;
+    final double effectiveRate = (pow(1 + r, 12) - 1) * 100;
+
+    return MonthlySavingsResult(
+      totalAfterYears: totalAfterYears,
+      totalContributions: totalContributions,
+      totalInterest: totalInterest,
+      effectiveRate: effectiveRate,
+    );
+  }
+
+  // ─── Education Savings ────────────────────────────────────────────────────
+  static EducationSavingsResult calculateEducationSavings({
+    required double currentCost,
+    required double yearsUntilCollege,
+    required double inflationRate,
+    required double annualReturn,
+    required double currentSavings,
+  }) {
+    final double futureEducationCost =
+        currentCost * pow(1 + inflationRate / 100, yearsUntilCollege);
+
+    final int n = (yearsUntilCollege * 12).toInt();
+    final double r = annualReturn / 1200;
+
+    final double fvCurrentSavings = currentSavings * pow(1 + r, n);
+    final double shortfall = (futureEducationCost - fvCurrentSavings).clamp(0, double.infinity);
+
+    double monthlySavingsNeeded;
+    if (shortfall <= 0 || r <= 0) {
+      monthlySavingsNeeded = 0;
+    } else {
+      monthlySavingsNeeded = shortfall / ((pow(1 + r, n) - 1) / r);
+    }
+
+    final double totalContributions = monthlySavingsNeeded * n;
+    final double totalInterest = futureEducationCost - currentSavings - totalContributions;
+
+    return EducationSavingsResult(
+      futureEducationCost: futureEducationCost,
+      monthlySavingsNeeded: monthlySavingsNeeded,
+      totalContributions: totalContributions,
+      totalInterest: totalInterest,
+      shortfall: shortfall,
+    );
+  }
+
+  // ─── Child Future Planning ────────────────────────────────────────────────
+  static ChildFutureResult calculateChildFuturePlanning({
+    required double goalAmount,
+    required double childAge,
+    required double targetAge,
+    required double currentSavings,
+    required double annualReturn,
+  }) {
+    final int years = (targetAge - childAge).toInt();
+    final int n = years * 12;
+    final double r = annualReturn / 1200;
+
+    final double fvCurrentSavings = currentSavings * pow(1 + r, n);
+    final double shortfall = (goalAmount - fvCurrentSavings).clamp(0, double.infinity);
+
+    double monthlyInvestment;
+    if (shortfall <= 0 || r <= 0) {
+      monthlyInvestment = 0;
+    } else {
+      monthlyInvestment = shortfall / ((pow(1 + r, n) - 1) / r);
+    }
+
+    final double totalInvested = monthlyInvestment * n;
+    final double totalInterest =
+        goalAmount - currentSavings - totalInvested;
+    final double futureValue = goalAmount;
+
+    return ChildFutureResult(
+      futureValue: futureValue,
+      monthlyInvestment: monthlyInvestment,
+      totalInvested: totalInvested,
+      totalInterest: totalInterest,
+    );
+  }
 }
 
 // ─── Result Models ────────────────────────────────────────────────────────────
@@ -345,5 +477,67 @@ class EmergencyFundResult {
     required this.targetAmount,
     required this.shortfall,
     required this.monthsToAchieve,
+  });
+}
+
+// ─── Goal Savings ──────────────────────────────────────────────────────────
+class GoalSavingsResult {
+  final double monthlySavingsNeeded;
+  final double totalContributions;
+  final double totalInterest;
+  final double goalAmount;
+
+  const GoalSavingsResult({
+    required this.monthlySavingsNeeded,
+    required this.totalContributions,
+    required this.totalInterest,
+    required this.goalAmount,
+  });
+}
+
+// ─── Monthly Savings ───────────────────────────────────────────────────────
+class MonthlySavingsResult {
+  final double totalAfterYears;
+  final double totalContributions;
+  final double totalInterest;
+  final double effectiveRate;
+
+  const MonthlySavingsResult({
+    required this.totalAfterYears,
+    required this.totalContributions,
+    required this.totalInterest,
+    required this.effectiveRate,
+  });
+}
+
+// ─── Education Savings ─────────────────────────────────────────────────────
+class EducationSavingsResult {
+  final double futureEducationCost;
+  final double monthlySavingsNeeded;
+  final double totalContributions;
+  final double totalInterest;
+  final double shortfall;
+
+  const EducationSavingsResult({
+    required this.futureEducationCost,
+    required this.monthlySavingsNeeded,
+    required this.totalContributions,
+    required this.totalInterest,
+    required this.shortfall,
+  });
+}
+
+// ─── Child Future Planning ─────────────────────────────────────────────────
+class ChildFutureResult {
+  final double futureValue;
+  final double monthlyInvestment;
+  final double totalInvested;
+  final double totalInterest;
+
+  const ChildFutureResult({
+    required this.futureValue,
+    required this.monthlyInvestment,
+    required this.totalInvested,
+    required this.totalInterest,
   });
 }

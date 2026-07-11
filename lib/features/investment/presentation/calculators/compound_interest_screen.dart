@@ -74,7 +74,7 @@ class _CompoundInterestScreenState
   @override
   String get resultSummary => _result == null
       ? ''
-      : 'CI: ${NumberFormatter.formatCurrency(_principalValue, symbol: _symbol)} @ ${_rate}% '
+      : 'CI: ${NumberFormatter.formatCurrency(_principalValue, symbol: _symbol)} @ $_rate% '
           'for $_years yrs = ${NumberFormatter.formatCurrency(_result!.maturityAmount, symbol: _symbol)}';
 
   String get _symbol => ref.read(currencySymbolProvider);

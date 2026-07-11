@@ -24,12 +24,12 @@ class ResultCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: isHighlighted
-            ? AppColors.primary.withOpacity(0.08)
+            ? AppColors.primary.withValues(alpha: 0.08)
             : AppColors.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isHighlighted
-              ? AppColors.primary.withOpacity(0.3)
+              ? AppColors.primary.withValues(alpha: 0.3)
               : AppColors.border,
         ),
       ),

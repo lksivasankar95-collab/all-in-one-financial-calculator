@@ -266,10 +266,10 @@ class _CapitalGainScreenState extends CalculatorBaseState<CapitalGainScreen> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 4),
                               decoration: BoxDecoration(
-                                color: AppColors.primary.withOpacity(0.1),
+                                color: AppColors.primary.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(6),
                                 border: Border.all(
-                                    color: AppColors.primary.withOpacity(0.3)),
+                                    color: AppColors.primary.withValues(alpha: 0.3)),
                               ),
                               child: Text(
                                 _ciiRatio.toStringAsFixed(2),
@@ -292,9 +292,9 @@ class _CapitalGainScreenState extends CalculatorBaseState<CapitalGainScreen> {
                             _result = null;
                           }),
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children: [
                             Text('1.00',
                                 style: TextStyle(
                                     fontSize: 11, color: AppColors.textHint)),
@@ -311,14 +311,14 @@ class _CapitalGainScreenState extends CalculatorBaseState<CapitalGainScreen> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppColors.info.withOpacity(0.06),
+                      color: AppColors.info.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.info.withOpacity(0.2)),
+                      border: Border.all(color: AppColors.info.withValues(alpha: 0.2)),
                     ),
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Budget 2024 Rates',
                           style: TextStyle(
                             fontSize: 11,
@@ -326,7 +326,7 @@ class _CapitalGainScreenState extends CalculatorBaseState<CapitalGainScreen> {
                             color: AppColors.info,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         _RateInfoRow('STCG Equity', '20% (flat)'),
                         _RateInfoRow('LTCG Equity', '12.5% above ₹1.25L'),
                         _RateInfoRow('STCG Debt', 'Slab rate (shown as 30%)'),
@@ -380,9 +380,9 @@ class _CapitalGainScreenState extends CalculatorBaseState<CapitalGainScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: resultColor.withOpacity(0.08),
+              color: resultColor.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: resultColor.withOpacity(0.3)),
+              border: Border.all(color: resultColor.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [
@@ -500,7 +500,7 @@ class _ToggleBtn extends StatelessWidget {
           margin: const EdgeInsets.all(4),
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: selected ? AppColors.tax.withOpacity(0.15) : Colors.transparent,
+            color: selected ? AppColors.tax.withValues(alpha: 0.15) : Colors.transparent,
             borderRadius: BorderRadius.circular(10),
             border:
                 selected ? Border.all(color: AppColors.tax, width: 1.5) : null,
@@ -520,7 +520,7 @@ class _ToggleBtn extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 10,
                   color: selected
-                      ? AppColors.tax.withOpacity(0.7)
+                      ? AppColors.tax.withValues(alpha: 0.7)
                       : AppColors.textHint,
                 ),
               ),

@@ -143,10 +143,10 @@ class _InflationScreenState extends CalculatorBaseState<InflationScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
-                              color: AppColors.utility.withOpacity(0.1),
+                              color: AppColors.utility.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(
-                                  color: AppColors.utility.withOpacity(0.3)),
+                                  color: AppColors.utility.withValues(alpha: 0.3)),
                             ),
                             child: Text(
                               '${_inflationRate.toStringAsFixed(1)}%',
@@ -170,9 +170,9 @@ class _InflationScreenState extends CalculatorBaseState<InflationScreen> {
                           _result = null;
                         }),
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text('1%',
                               style: TextStyle(
                                   fontSize: 11, color: AppColors.textHint)),
@@ -202,10 +202,10 @@ class _InflationScreenState extends CalculatorBaseState<InflationScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
-                              color: AppColors.utility.withOpacity(0.1),
+                              color: AppColors.utility.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(
-                                  color: AppColors.utility.withOpacity(0.3)),
+                                  color: AppColors.utility.withValues(alpha: 0.3)),
                             ),
                             child: Text(
                               '$_years ${_years == 1 ? "yr" : "yrs"}',
@@ -229,9 +229,9 @@ class _InflationScreenState extends CalculatorBaseState<InflationScreen> {
                           _result = null;
                         }),
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text('1 yr',
                               style: TextStyle(
                                   fontSize: 11, color: AppColors.textHint)),
@@ -289,9 +289,9 @@ class _InflationScreenState extends CalculatorBaseState<InflationScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.utility.withOpacity(0.08),
+              color: AppColors.utility.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.utility.withOpacity(0.3)),
+              border: Border.all(color: AppColors.utility.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [

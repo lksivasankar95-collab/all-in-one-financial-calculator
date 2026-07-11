@@ -57,23 +57,27 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.4.0
 
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: false
-  image_path: "assets/icons/app_icon.png"
-  min_sdk_android: 21
-  adaptive_icon_background: "#000000"
-  adaptive_icon_foreground: "assets/icons/app_icon_foreground.png"
-
-flutter_native_splash:
-  color: "#000000"
-  color_dark: "#000000"
-  fullscreen: true
-  android_12:
-    color: "#000000"
 
 flutter:
   uses-material-design: true
   assets:
     - assets/icons/
     - assets/images/
+
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/icons/logo.png"
+  adaptive_icon_foreground: "assets/icons/logo.png"
+  adaptive_icon_background: "#0D0D0D"
+  adaptive_icon_foreground_inset: 10
+  min_sdk_android: 21
+
+flutter_native_splash:
+  color: "#000000"
+  image: "assets/icons/logo.png"
+  android: true
+  android_gravity: center
+  android_12:
+    color: "#000000"
+    image: "assets/icons/logo.png"
+  fullscreen: true

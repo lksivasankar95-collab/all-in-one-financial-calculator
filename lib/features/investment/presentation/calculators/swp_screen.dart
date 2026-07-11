@@ -208,10 +208,10 @@ class _SwpScreenState extends CalculatorBaseState<SwpScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.07),
+              color: AppColors.primary.withValues(alpha: 0.07),
               borderRadius: BorderRadius.circular(14),
               border:
-                  Border.all(color: AppColors.primary.withOpacity(0.25)),
+                  Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
             ),
             child: Column(
               children: [
@@ -240,7 +240,7 @@ class _SwpScreenState extends CalculatorBaseState<SwpScreen> {
                       'Monthly returns exceed withdrawal amount',
                       style: TextStyle(
                         fontSize: 11,
-                        color: AppColors.success.withOpacity(0.8),
+                        color: AppColors.success.withValues(alpha: 0.8),
                       ),
                     ),
                   ),

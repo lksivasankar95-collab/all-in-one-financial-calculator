@@ -59,7 +59,7 @@ class _EmergencyFundScreenState extends CalculatorBaseState<EmergencyFundScreen>
   String get resultSummary => _result == null
       ? ''
       : 'Emergency fund target: ${NumberFormatter.formatCurrency(_result!.targetAmount, symbol: _symbol)} '
-          '(${_months} months). '
+          '($_months months). '
           '${_result!.shortfall <= 0 ? "Fund is ADEQUATE." : "Shortfall: ${NumberFormatter.formatCurrency(_result!.shortfall, symbol: _symbol)}"}';
 
   String get _symbol => ref.read(currencySymbolProvider);
@@ -74,7 +74,7 @@ class _EmergencyFundScreenState extends CalculatorBaseState<EmergencyFundScreen>
     if (months < 1) return 'Less than a month';
     final int yrs = months ~/ 12;
     final int mo = months.toInt() % 12;
-    if (yrs == 0) return '~${mo} ${mo == 1 ? "month" : "months"}';
+    if (yrs == 0) return '~$mo ${mo == 1 ? "month" : "months"}';
     if (mo == 0) return '~$yrs ${yrs == 1 ? "year" : "years"}';
     return '~$yrs yr${yrs > 1 ? "s" : ""} $mo mo';
   }
@@ -115,16 +115,16 @@ class _EmergencyFundScreenState extends CalculatorBaseState<EmergencyFundScreen>
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.savings.withOpacity(0.08),
+                color: AppColors.savings.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.savings.withOpacity(0.3)),
+                border: Border.all(color: AppColors.savings.withValues(alpha: 0.3)),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(Icons.health_and_safety_rounded,
                       color: AppColors.savings, size: 20),
-                  const SizedBox(width: 10),
-                  const Expanded(
+                  SizedBox(width: 10),
+                  Expanded(
                     child: Text(
                       'Financial experts recommend 3–6 months of expenses as your emergency fund.',
                       style: TextStyle(
@@ -188,7 +188,7 @@ class _EmergencyFundScreenState extends CalculatorBaseState<EmergencyFundScreen>
                                 horizontal: 14, vertical: 6),
                             decoration: BoxDecoration(
                               color: selected
-                                  ? AppColors.savings.withOpacity(0.15)
+                                  ? AppColors.savings.withValues(alpha: 0.15)
                                   : AppColors.surface,
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
@@ -272,13 +272,13 @@ class _EmergencyFundScreenState extends CalculatorBaseState<EmergencyFundScreen>
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
               color: _isAdequate
-                  ? AppColors.success.withOpacity(0.1)
-                  : AppColors.warning.withOpacity(0.1),
+                  ? AppColors.success.withValues(alpha: 0.1)
+                  : AppColors.warning.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: _isAdequate
-                    ? AppColors.success.withOpacity(0.35)
-                    : AppColors.warning.withOpacity(0.35),
+                    ? AppColors.success.withValues(alpha: 0.35)
+                    : AppColors.warning.withValues(alpha: 0.35),
               ),
             ),
             child: Row(
@@ -287,8 +287,8 @@ class _EmergencyFundScreenState extends CalculatorBaseState<EmergencyFundScreen>
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   decoration: BoxDecoration(
                     color: _isAdequate
-                        ? AppColors.success.withOpacity(0.2)
-                        : AppColors.warning.withOpacity(0.2),
+                        ? AppColors.success.withValues(alpha: 0.2)
+                        : AppColors.warning.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -305,7 +305,7 @@ class _EmergencyFundScreenState extends CalculatorBaseState<EmergencyFundScreen>
                 Expanded(
                   child: Text(
                     _isAdequate
-                        ? 'Your emergency fund covers ${_months} months of expenses. Great work!'
+                        ? 'Your emergency fund covers $_months months of expenses. Great work!'
                         : 'You need ${NumberFormatter.formatCurrency(r.shortfall, symbol: symbol)} more to reach your target.',
                     style: TextStyle(
                       fontSize: 12,
@@ -406,7 +406,7 @@ class _EmergencyFundScreenState extends CalculatorBaseState<EmergencyFundScreen>
                   isHighlighted: true,
                 ),
               if (_isAdequate)
-                ResultItem(
+                const ResultItem(
                   label: 'Status',
                   value: 'Fully Funded',
                   isHighlighted: true,

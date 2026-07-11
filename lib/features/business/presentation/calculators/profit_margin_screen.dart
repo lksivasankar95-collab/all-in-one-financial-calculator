@@ -333,9 +333,9 @@ class _MetricCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.08),
+        color: color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -373,7 +373,7 @@ class _MetricCard extends StatelessWidget {
           Text(
             subValue,
             style: TextStyle(
-                fontSize: 11, color: color.withOpacity(0.7)),
+                fontSize: 11, color: color.withValues(alpha: 0.7)),
           ),
         ],
       ),

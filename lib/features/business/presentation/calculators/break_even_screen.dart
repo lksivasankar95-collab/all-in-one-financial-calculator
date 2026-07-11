@@ -222,9 +222,9 @@ class _BreakEvenScreenState extends CalculatorBaseState<BreakEvenScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.business.withOpacity(0.08),
+              color: AppColors.business.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.business.withOpacity(0.3)),
+              border: Border.all(color: AppColors.business.withValues(alpha: 0.3)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

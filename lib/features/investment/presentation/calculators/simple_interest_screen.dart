@@ -63,7 +63,7 @@ class _SimpleInterestScreenState
   @override
   String get resultSummary => _result == null
       ? ''
-      : 'SI: ${NumberFormatter.formatCurrency(_principalValue, symbol: _symbol)} @ ${_rate}% '
+      : 'SI: ${NumberFormatter.formatCurrency(_principalValue, symbol: _symbol)} @ $_rate% '
           'for $_years yrs = Interest ${NumberFormatter.formatCurrency(_result!.interest, symbol: _symbol)}';
 
   String get _symbol => ref.read(currencySymbolProvider);
@@ -281,9 +281,9 @@ class _BigResultTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.08),
+        color: color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withOpacity(0.25)),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -181,7 +181,7 @@ class _PercentageScreenState extends CalculatorBaseState<PercentageScreen> {
                                 horizontal: 12, vertical: 8),
                             decoration: BoxDecoration(
                               color: selected
-                                  ? AppColors.utility.withOpacity(0.15)
+                                  ? AppColors.utility.withValues(alpha: 0.15)
                                   : AppColors.surface,
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
@@ -294,9 +294,9 @@ class _PercentageScreenState extends CalculatorBaseState<PercentageScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.utility.withOpacity(0.08),
+              color: AppColors.utility.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.utility.withOpacity(0.3)),
+              border: Border.all(color: AppColors.utility.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [

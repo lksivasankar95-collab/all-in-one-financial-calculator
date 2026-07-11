@@ -236,7 +236,7 @@ class _CagrScreenState extends CalculatorBaseState<CagrScreen> {
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                const Text(
                   'Compound Annual Growth Rate',
                   style: TextStyle(
                     fontSize: 12,

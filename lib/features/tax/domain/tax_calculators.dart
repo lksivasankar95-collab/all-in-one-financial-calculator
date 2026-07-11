@@ -53,7 +53,7 @@ class TaxCalculators {
 
   static IncomeTaxResult _calcNewRegime(double grossIncome) {
     const standardDeduction = 75000.0;
-    final taxableIncome = (grossIncome - standardDeduction).clamp(0, double.infinity);
+    final taxableIncome = (grossIncome - standardDeduction).clamp(0, double.infinity).toDouble();
 
     double tax = 0;
     if (taxableIncome > 1500000) {
@@ -84,7 +84,7 @@ class TaxCalculators {
       rebate87A = tax;
     }
 
-    final taxAfterRebate = (tax - rebate87A).clamp(0, double.infinity);
+    final taxAfterRebate = (tax - rebate87A).clamp(0, double.infinity).toDouble();
     final cess = taxAfterRebate * 0.04;
     final totalTax = taxAfterRebate + cess;
     final effectiveRate = grossIncome > 0 ? (totalTax / grossIncome) * 100 : 0.0;
@@ -108,9 +108,9 @@ class TaxCalculators {
   ) {
     const standardDeduction = 50000.0;
     const max80C = 150000.0;
-    final eff80C = deductions80C.clamp(0, max80C);
+    final eff80C = deductions80C.clamp(0, max80C).toDouble();
     final taxableIncome =
-        (grossIncome - standardDeduction - eff80C - deductionsOther).clamp(0, double.infinity);
+        (grossIncome - standardDeduction - eff80C - deductionsOther).clamp(0, double.infinity).toDouble();
 
     double tax = 0;
     if (taxableIncome > 1000000) {
@@ -130,7 +130,7 @@ class TaxCalculators {
       rebate87A = tax;
     }
 
-    final taxAfterRebate = (tax - rebate87A).clamp(0, double.infinity);
+    final taxAfterRebate = (tax - rebate87A).clamp(0, double.infinity).toDouble();
     final cess = taxAfterRebate * 0.04;
     final totalTax = taxAfterRebate + cess;
     final effectiveRate = grossIncome > 0 ? (totalTax / grossIncome) * 100 : 0.0;
@@ -161,10 +161,10 @@ class TaxCalculators {
 
     final conditionA = annualHra;
     final conditionB = annualBasic * (isMetroCity ? 0.50 : 0.40);
-    final conditionC = (annualRent - annualBasic * 0.10).clamp(0, double.infinity);
+    final conditionC = (annualRent - annualBasic * 0.10).clamp(0, double.infinity).toDouble();
 
     final exemption = [conditionA, conditionB, conditionC].reduce((a, b) => a < b ? a : b);
-    final taxableHra = (annualHra - exemption).clamp(0, double.infinity);
+    final taxableHra = (annualHra - exemption).clamp(0, double.infinity).toDouble();
     final annualSaving = exemption * 0.30; // Saving at 30% tax bracket
 
     return HraResult(
@@ -196,7 +196,7 @@ class TaxCalculators {
       if (isLongTerm) {
         // LTCG equity: 12.5% above ₹1.25L (Budget 2024)
         const exemptionLimit = 125000.0;
-        taxableGain = gain > 0 ? (gain - exemptionLimit).clamp(0, double.infinity) : 0;
+        taxableGain = gain > 0 ? (gain - exemptionLimit).clamp(0, double.infinity).toDouble() : 0;
         taxRate = 12.5;
       } else {
         // STCG equity: 20% (Budget 2024)
@@ -207,7 +207,7 @@ class TaxCalculators {
       if (isLongTerm) {
         // LTCG debt: 20% with indexation
         indexedCost = purchasePrice * costInflationIndexRatio;
-        taxableGain = (salePrice - indexedCost).clamp(0, double.infinity);
+        taxableGain = (salePrice - indexedCost).clamp(0, double.infinity).toDouble();
         taxRate = 20.0;
       } else {
         // STCG debt: slab rate (represented as 30% max bracket for display)
@@ -226,6 +226,219 @@ class TaxCalculators {
       taxAmount: taxAmount,
       effectiveRate: effectiveRate,
       taxRate: taxRate,
+    );
+  }
+
+  // ─── TDS ─────────────────────────────────────────────────────────────────
+
+  static const Map<String, double> tdsSections = {
+    '194A': 10.0,
+    '194C': 1.0,
+    '194H': 5.0,
+    '194I': 10.0,
+    '194J': 10.0,
+    '194DA': 5.0,
+  };
+
+  static TdsResult calculateTds({
+    required double amount,
+    required String tdsSection,
+    required double customRate,
+  }) {
+    final rate = tdsSections[tdsSection] ?? customRate;
+    final tdsAmount = amount * rate / 100;
+    final netAmount = amount - tdsAmount;
+
+    return TdsResult(
+      grossAmount: amount,
+      tdsAmount: tdsAmount,
+      netAmount: netAmount,
+      tdsRate: rate,
+      section: tdsSection,
+    );
+  }
+
+  // ─── Salary Take Home ─────────────────────────────────────────────────────
+
+  static SalaryResult calculateSalaryTakeHome({
+    required double ctc,
+    required double basicPercent,
+    required double hraPercent,
+    required double conveyanceAllowance,
+    required double medicalAllowance,
+    required double pfPercent,
+    required double professionalTax,
+    required bool isNewRegime,
+  }) {
+    final basic = ctc * basicPercent / 100;
+    final hra = basic * hraPercent / 100;
+    final otherAllowances = conveyanceAllowance + medicalAllowance;
+
+    const standardDeduction = 50000.0;
+    final pf = basic * pfPercent / 100;
+    final grossDeductions = standardDeduction + pf + professionalTax;
+
+    final taxableIncome = (ctc - grossDeductions).clamp(0, double.infinity).toDouble();
+
+    double tax = 0;
+    if (isNewRegime) {
+      if (taxableIncome > 1500000) {
+        tax += (taxableIncome - 1500000) * 0.30;
+        tax += (1500000 - 1200000) * 0.20;
+        tax += (1200000 - 1000000) * 0.15;
+        tax += (1000000 - 700000) * 0.10;
+        tax += (700000 - 300000) * 0.05;
+      } else if (taxableIncome > 1200000) {
+        tax += (taxableIncome - 1200000) * 0.20;
+        tax += (1200000 - 1000000) * 0.15;
+        tax += (1000000 - 700000) * 0.10;
+        tax += (700000 - 300000) * 0.05;
+      } else if (taxableIncome > 1000000) {
+        tax += (taxableIncome - 1000000) * 0.15;
+        tax += (1000000 - 700000) * 0.10;
+        tax += (700000 - 300000) * 0.05;
+      } else if (taxableIncome > 700000) {
+        tax += (taxableIncome - 700000) * 0.10;
+        tax += (700000 - 300000) * 0.05;
+      } else if (taxableIncome > 300000) {
+        tax += (taxableIncome - 300000) * 0.05;
+      }
+    } else {
+      if (taxableIncome > 1000000) {
+        tax += (taxableIncome - 1000000) * 0.30;
+        tax += (1000000 - 500000) * 0.20;
+        tax += (500000 - 250000) * 0.05;
+      } else if (taxableIncome > 500000) {
+        tax += (taxableIncome - 500000) * 0.20;
+        tax += (500000 - 250000) * 0.05;
+      } else if (taxableIncome > 250000) {
+        tax += (taxableIncome - 250000) * 0.05;
+      }
+    }
+
+    double rebate = 0;
+    if (isNewRegime && taxableIncome <= 700000) {
+      rebate = tax;
+    } else if (!isNewRegime && taxableIncome <= 500000) {
+      rebate = tax;
+    }
+
+    final taxAfterRebate = (tax - rebate).clamp(0, double.infinity).toDouble();
+    final cess = taxAfterRebate * 0.04;
+    final totalTax = taxAfterRebate + cess;
+    final annualTakeHome = ctc - totalTax;
+    final monthlyTakeHome = annualTakeHome / 12;
+
+    return SalaryResult(
+      grossAnnualSalary: ctc,
+      basicPay: basic,
+      hra: hra,
+      otherAllowances: otherAllowances,
+      grossDeductions: grossDeductions,
+      taxableIncome: taxableIncome,
+      taxAmount: taxAfterRebate,
+      cessAmount: cess,
+      totalTaxLiability: totalTax,
+      monthlyTakeHome: monthlyTakeHome,
+      annualTakeHome: annualTakeHome,
+    );
+  }
+
+  // ─── Old vs New Tax Regime ────────────────────────────────────────────────
+
+  static TaxRegimeResult calculateTaxRegimeComparison({
+    required double grossIncome,
+    required double hraExemption,
+    required double section80c,
+    required double section80d,
+    required double nps,
+    required double homeLoanInterest,
+    required double otherDeductions,
+  }) {
+    const standardDeduction = 50000.0;
+    const max80C = 150000.0;
+    const max80D = 25000.0;
+    const maxNps = 50000.0;
+    const maxHomeLoan = 200000.0;
+
+    final eff80C = section80c.clamp(0, max80C).toDouble();
+    final eff80D = section80d.clamp(0, max80D).toDouble();
+    final effNps = nps.clamp(0, maxNps).toDouble();
+    final effHomeLoan = homeLoanInterest.clamp(0, maxHomeLoan).toDouble();
+
+    final oldDeductions = standardDeduction + eff80C + eff80D + effNps + hraExemption + effHomeLoan + otherDeductions;
+    final oldTaxableIncome = (grossIncome - oldDeductions).clamp(0, double.infinity).toDouble();
+    final newTaxableIncome = (grossIncome - 50000).clamp(0, double.infinity).toDouble();
+
+    double oldTax = 0;
+    if (oldTaxableIncome > 1000000) {
+      oldTax += (oldTaxableIncome - 1000000) * 0.30;
+      oldTax += (1000000 - 500000) * 0.20;
+      oldTax += (500000 - 250000) * 0.05;
+    } else if (oldTaxableIncome > 500000) {
+      oldTax += (oldTaxableIncome - 500000) * 0.20;
+      oldTax += (500000 - 250000) * 0.05;
+    } else if (oldTaxableIncome > 250000) {
+      oldTax += (oldTaxableIncome - 250000) * 0.05;
+    }
+    if (oldTaxableIncome <= 500000) {
+      oldTax = 0;
+    }
+
+    double newTax = 0;
+    if (newTaxableIncome > 1500000) {
+      newTax += (newTaxableIncome - 1500000) * 0.30;
+      newTax += (1500000 - 1200000) * 0.20;
+      newTax += (1200000 - 1000000) * 0.15;
+      newTax += (1000000 - 700000) * 0.10;
+      newTax += (700000 - 300000) * 0.05;
+    } else if (newTaxableIncome > 1200000) {
+      newTax += (newTaxableIncome - 1200000) * 0.20;
+      newTax += (1200000 - 1000000) * 0.15;
+      newTax += (1000000 - 700000) * 0.10;
+      newTax += (700000 - 300000) * 0.05;
+    } else if (newTaxableIncome > 1000000) {
+      newTax += (newTaxableIncome - 1000000) * 0.15;
+      newTax += (1000000 - 700000) * 0.10;
+      newTax += (700000 - 300000) * 0.05;
+    } else if (newTaxableIncome > 700000) {
+      newTax += (newTaxableIncome - 700000) * 0.10;
+      newTax += (700000 - 300000) * 0.05;
+    } else if (newTaxableIncome > 300000) {
+      newTax += (newTaxableIncome - 300000) * 0.05;
+    }
+    if (newTaxableIncome <= 700000) {
+      newTax = 0;
+    }
+
+    final oldCess = oldTax * 0.04;
+    final newCess = newTax * 0.04;
+    final oldTotalTax = oldTax + oldCess;
+    final newTotalTax = newTax + newCess;
+    final savings = (oldTotalTax - newTotalTax).abs();
+    final recommended = oldTotalTax <= newTotalTax ? 'Old Regime' : 'New Regime';
+
+    return TaxRegimeResult(
+      grossIncome: grossIncome,
+      deductions: {
+        'Standard Deduction': standardDeduction,
+        'Section 80C': eff80C,
+        'Section 80D': eff80D,
+        'NPS (80CCD(1B))': effNps,
+        'HRA Exemption': hraExemption,
+        'Home Loan Interest': effHomeLoan,
+        'Other Deductions': otherDeductions,
+      },
+      oldTaxableIncome: oldTaxableIncome,
+      newTaxableIncome: newTaxableIncome,
+      oldTax: oldTax,
+      newTax: newTax,
+      oldCess: oldCess,
+      newCess: newCess,
+      oldTotalTax: oldTotalTax,
+      newTotalTax: newTotalTax,
+      savings: savings,
+      recommended: recommended,
     );
   }
 }
@@ -305,5 +518,85 @@ class CapitalGainResult {
     required this.taxAmount,
     required this.effectiveRate,
     required this.taxRate,
+  });
+}
+
+// ─── TDS ────────────────────────────────────────────────────────────────────
+
+class TdsResult {
+  final double grossAmount;
+  final double tdsAmount;
+  final double netAmount;
+  final double tdsRate;
+  final String section;
+
+  const TdsResult({
+    required this.grossAmount,
+    required this.tdsAmount,
+    required this.netAmount,
+    required this.tdsRate,
+    required this.section,
+  });
+}
+
+// ─── Salary Take Home ───────────────────────────────────────────────────────
+
+class SalaryResult {
+  final double grossAnnualSalary;
+  final double basicPay;
+  final double hra;
+  final double otherAllowances;
+  final double grossDeductions;
+  final double taxableIncome;
+  final double taxAmount;
+  final double cessAmount;
+  final double totalTaxLiability;
+  final double monthlyTakeHome;
+  final double annualTakeHome;
+
+  const SalaryResult({
+    required this.grossAnnualSalary,
+    required this.basicPay,
+    required this.hra,
+    required this.otherAllowances,
+    required this.grossDeductions,
+    required this.taxableIncome,
+    required this.taxAmount,
+    required this.cessAmount,
+    required this.totalTaxLiability,
+    required this.monthlyTakeHome,
+    required this.annualTakeHome,
+  });
+}
+
+// ─── Old vs New Tax Regime ─────────────────────────────────────────────────
+
+class TaxRegimeResult {
+  final double grossIncome;
+  final Map<String, double> deductions;
+  final double oldTaxableIncome;
+  final double newTaxableIncome;
+  final double oldTax;
+  final double newTax;
+  final double oldCess;
+  final double newCess;
+  final double oldTotalTax;
+  final double newTotalTax;
+  final double savings;
+  final String recommended;
+
+  const TaxRegimeResult({
+    required this.grossIncome,
+    required this.deductions,
+    required this.oldTaxableIncome,
+    required this.newTaxableIncome,
+    required this.oldTax,
+    required this.newTax,
+    required this.oldCess,
+    required this.newCess,
+    required this.oldTotalTax,
+    required this.newTotalTax,
+    required this.savings,
+    required this.recommended,
   });
 }

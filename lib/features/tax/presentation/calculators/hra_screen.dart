@@ -258,9 +258,9 @@ class _HraScreenState extends CalculatorBaseState<HraScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.tax.withOpacity(0.08),
+              color: AppColors.tax.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.tax.withOpacity(0.3)),
+              border: Border.all(color: AppColors.tax.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [
@@ -331,9 +331,9 @@ class _HraScreenState extends CalculatorBaseState<HraScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.06),
+              color: AppColors.primary.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppColors.primary.withOpacity(0.2)),
+              border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
             ),
             child: Column(
               children: [
@@ -374,11 +374,11 @@ class _FormulaRow extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: isMin
-            ? AppColors.success.withOpacity(0.08)
+            ? AppColors.success.withValues(alpha: 0.08)
             : AppColors.surface,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: isMin ? AppColors.success.withOpacity(0.4) : AppColors.border,
+          color: isMin ? AppColors.success.withValues(alpha: 0.4) : AppColors.border,
           width: isMin ? 1.5 : 1,
         ),
       ),
@@ -482,7 +482,7 @@ class _CityToggleBtn extends StatelessWidget {
           margin: const EdgeInsets.all(4),
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
           decoration: BoxDecoration(
-            color: selected ? AppColors.tax.withOpacity(0.15) : Colors.transparent,
+            color: selected ? AppColors.tax.withValues(alpha: 0.15) : Colors.transparent,
             borderRadius: BorderRadius.circular(10),
             border: selected ? Border.all(color: AppColors.tax, width: 1.5) : null,
           ),
@@ -502,7 +502,7 @@ class _CityToggleBtn extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 9,
                   color: selected
-                      ? AppColors.tax.withOpacity(0.7)
+                      ? AppColors.tax.withValues(alpha: 0.7)
                       : AppColors.textHint,
                 ),
               ),

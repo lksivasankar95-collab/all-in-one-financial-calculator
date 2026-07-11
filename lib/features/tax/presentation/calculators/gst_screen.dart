@@ -156,7 +156,7 @@ class _GstScreenState extends CalculatorBaseState<GstScreen> {
                               padding: const EdgeInsets.symmetric(vertical: 10),
                               decoration: BoxDecoration(
                                 color: selected
-                                    ? AppColors.tax.withOpacity(0.15)
+                                    ? AppColors.tax.withValues(alpha: 0.15)
                                     : AppColors.surface,
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
@@ -268,9 +268,9 @@ class _GstScreenState extends CalculatorBaseState<GstScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.tax.withOpacity(0.08),
+              color: AppColors.tax.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.tax.withOpacity(0.3)),
+              border: Border.all(color: AppColors.tax.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [
@@ -383,7 +383,7 @@ class _ModeToggleBtn extends StatelessWidget {
           margin: const EdgeInsets.all(4),
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: selected ? AppColors.tax.withOpacity(0.15) : Colors.transparent,
+            color: selected ? AppColors.tax.withValues(alpha: 0.15) : Colors.transparent,
             borderRadius: BorderRadius.circular(10),
             border: selected
                 ? Border.all(color: AppColors.tax, width: 1.5)
@@ -403,7 +403,7 @@ class _ModeToggleBtn extends StatelessWidget {
                 subLabel,
                 style: TextStyle(
                   fontSize: 11,
-                  color: selected ? AppColors.tax.withOpacity(0.7) : AppColors.textHint,
+                  color: selected ? AppColors.tax.withValues(alpha: 0.7) : AppColors.textHint,
                 ),
               ),
             ],

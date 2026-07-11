@@ -202,10 +202,10 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: color.withOpacity(0.12),
+                        color: color.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(12),
                         border:
-                            Border.all(color: color.withOpacity(0.3)),
+                            Border.all(color: color.withValues(alpha: 0.3)),
                       ),
                       child: Icon(
                         _categoryIcon(item.category),
@@ -241,7 +241,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: color.withOpacity(0.1),
+                        color: color.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -256,7 +256,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                   ],
                 ),
               ),
-              Divider(
+              const Divider(
                   color: AppColors.border, thickness: 1, height: 1),
               // Content
               Expanded(
@@ -265,7 +265,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                   padding: const EdgeInsets.all(20),
                   children: [
                     if (item.inputs.isNotEmpty) ...[
-                      _SheetSectionLabel(label: 'Inputs'),
+                      const _SheetSectionLabel(label: 'Inputs'),
                       const SizedBox(height: 10),
                       ...item.inputs.entries.map(
                         (e) => _SheetDataRow(
@@ -276,7 +276,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                       const SizedBox(height: 20),
                     ],
                     if (item.results.isNotEmpty) ...[
-                      _SheetSectionLabel(label: 'Results'),
+                      const _SheetSectionLabel(label: 'Results'),
                       const SizedBox(height: 10),
                       ...item.results.entries.map(
                         (e) => _SheetDataRow(
@@ -293,10 +293,10 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 14, vertical: 10),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.07),
+                        color: AppColors.primary.withValues(alpha: 0.07),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                            color: AppColors.primary.withOpacity(0.25)),
+                            color: AppColors.primary.withValues(alpha: 0.25)),
                       ),
                       child: Row(
                         children: [
@@ -548,9 +548,9 @@ class _HistoryTile extends StatelessWidget {
         padding: const EdgeInsets.only(right: 20),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         decoration: BoxDecoration(
-          color: AppColors.error.withOpacity(0.15),
+          color: AppColors.error.withValues(alpha: 0.15),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.error.withOpacity(0.3)),
+          border: Border.all(color: AppColors.error.withValues(alpha: 0.3)),
         ),
         child: const Row(
           mainAxisSize: MainAxisSize.min,
@@ -587,9 +587,9 @@ class _HistoryTile extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(9),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.12),
+                  color: color.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: color.withOpacity(0.25)),
+                  border: Border.all(color: color.withValues(alpha: 0.25)),
                 ),
                 child: Icon(icon, color: color, size: 18),
               ),
@@ -770,12 +770,12 @@ class _SheetDataRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         color: isResult
-            ? (color ?? AppColors.primary).withOpacity(0.06)
+            ? (color ?? AppColors.primary).withValues(alpha: 0.06)
             : AppColors.card,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: isResult
-              ? (color ?? AppColors.primary).withOpacity(0.2)
+              ? (color ?? AppColors.primary).withValues(alpha: 0.2)
               : AppColors.border,
         ),
       ),

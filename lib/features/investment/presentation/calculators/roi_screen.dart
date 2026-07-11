@@ -190,9 +190,9 @@ class _RoiScreenState extends CalculatorBaseState<RoiScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: resultColor.withOpacity(0.08),
+              color: resultColor.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: resultColor.withOpacity(0.3)),
+              border: Border.all(color: resultColor.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [
@@ -229,7 +229,7 @@ class _RoiScreenState extends CalculatorBaseState<RoiScreen> {
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                const Text(
                   'Return on Investment',
                   style: TextStyle(
                     fontSize: 12,

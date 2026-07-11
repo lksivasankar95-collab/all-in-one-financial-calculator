@@ -164,9 +164,9 @@ class _NpsScreenState extends CalculatorBaseState<NpsScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: AppColors.savings.withOpacity(0.06),
+                      color: AppColors.savings.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.savings.withOpacity(0.2)),
+                      border: Border.all(color: AppColors.savings.withValues(alpha: 0.2)),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -224,9 +224,9 @@ class _NpsScreenState extends CalculatorBaseState<NpsScreen> {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: AppColors.info.withOpacity(0.06),
+                      color: AppColors.info.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.info.withOpacity(0.2)),
+                      border: Border.all(color: AppColors.info.withValues(alpha: 0.2)),
                     ),
                     child: Row(
                       children: [

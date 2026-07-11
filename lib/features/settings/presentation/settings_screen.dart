@@ -85,12 +85,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   height: 38,
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? AppColors.primary.withOpacity(0.15)
+                        ? AppColors.primary.withValues(alpha: 0.15)
                         : AppColors.surface,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       color: isSelected
-                          ? AppColors.primary.withOpacity(0.5)
+                          ? AppColors.primary.withValues(alpha: 0.5)
                           : AppColors.border,
                     ),
                   ),
@@ -327,7 +327,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         padding: const EdgeInsets.fromLTRB(16, 20, 16, 40),
         children: [
           // ── APPEARANCE ─────────────────────────────────────────────────────
-          _SectionHeader(title: 'Appearance'),
+          const _SectionHeader(title: 'Appearance'),
           const SizedBox(height: 10),
           _SettingCard(
             icon: Icons.dark_mode_rounded,
@@ -338,10 +338,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                    color: AppColors.primary.withOpacity(0.25)),
+                    color: AppColors.primary.withValues(alpha: 0.25)),
               ),
               child: const Text(
                 'Dark',
@@ -369,7 +369,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
           // ── SECURITY ───────────────────────────────────────────────────────
           const SizedBox(height: 24),
-          _SectionHeader(title: 'Security'),
+          const _SectionHeader(title: 'Security'),
           const SizedBox(height: 10),
           _SettingCard(
             icon: Icons.fingerprint_rounded,
@@ -388,8 +388,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             .read(settingsProvider.notifier)
                             .setBiometric(val)
                         : null,
-                    activeColor: AppColors.primary,
-                    activeTrackColor: AppColors.primary.withOpacity(0.25),
+                    activeThumbColor: AppColors.primary,
+                    activeTrackColor: AppColors.primary.withValues(alpha: 0.25),
                     inactiveThumbColor: AppColors.textHint,
                     inactiveTrackColor: AppColors.border,
                   )
@@ -405,7 +405,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
           // ── CALCULATIONS ───────────────────────────────────────────────────
           const SizedBox(height: 24),
-          _SectionHeader(title: 'Calculations'),
+          const _SectionHeader(title: 'Calculations'),
           const SizedBox(height: 10),
           _SettingCard(
             icon: Icons.bar_chart_rounded,
@@ -416,8 +416,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               value: settings.showCalculationChart,
               onChanged: (val) =>
                   ref.read(settingsProvider.notifier).setShowChart(val),
-              activeColor: AppColors.primary,
-              activeTrackColor: AppColors.primary.withOpacity(0.25),
+              activeThumbColor: AppColors.primary,
+              activeTrackColor: AppColors.primary.withValues(alpha: 0.25),
               inactiveThumbColor: AppColors.textHint,
               inactiveTrackColor: AppColors.border,
             ),
@@ -432,8 +432,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               value: settings.hapticFeedback,
               onChanged: (val) =>
                   ref.read(settingsProvider.notifier).setHaptic(val),
-              activeColor: AppColors.primary,
-              activeTrackColor: AppColors.primary.withOpacity(0.25),
+              activeThumbColor: AppColors.primary,
+              activeTrackColor: AppColors.primary.withValues(alpha: 0.25),
               inactiveThumbColor: AppColors.textHint,
               inactiveTrackColor: AppColors.border,
             ),
@@ -451,10 +451,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColors.utility.withOpacity(0.1),
+                    color: AppColors.utility.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                        color: AppColors.utility.withOpacity(0.3)),
+                        color: AppColors.utility.withValues(alpha: 0.3)),
                   ),
                   child: Text(
                     '${settings.maxHistory}',
@@ -475,7 +475,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
           // ── DATA ───────────────────────────────────────────────────────────
           const SizedBox(height: 24),
-          _SectionHeader(title: 'Data'),
+          const _SectionHeader(title: 'Data'),
           const SizedBox(height: 10),
           _SettingCard(
             icon: Icons.delete_outline_rounded,
@@ -499,7 +499,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
           // ── ABOUT ──────────────────────────────────────────────────────────
           const SizedBox(height: 24),
-          _SectionHeader(title: 'About'),
+          const _SectionHeader(title: 'About'),
           const SizedBox(height: 10),
           _SettingCard(
             icon: Icons.info_outline_rounded,
@@ -510,10 +510,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                    color: AppColors.primary.withOpacity(0.25)),
+                    color: AppColors.primary.withValues(alpha: 0.25)),
               ),
               child: const Text(
                 'v${AppConstants.appVersion}',
@@ -526,7 +526,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ),
           const SizedBox(height: 8),
-          _SettingCard(
+          const _SettingCard(
             icon: Icons.calculate_rounded,
             iconColor: AppColors.primary,
             title: 'App Name',
@@ -560,7 +560,7 @@ class _SectionHeader extends StatelessWidget {
             borderRadius: BorderRadius.circular(2),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withOpacity(0.4),
+                color: AppColors.primary.withValues(alpha: 0.4),
                 blurRadius: 6,
               ),
             ],
@@ -607,8 +607,8 @@ class _SettingCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(14),
-        splashColor: AppColors.primary.withOpacity(0.04),
-        highlightColor: AppColors.primary.withOpacity(0.04),
+        splashColor: AppColors.primary.withValues(alpha: 0.04),
+        highlightColor: AppColors.primary.withValues(alpha: 0.04),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
           decoration: BoxDecoration(
@@ -622,9 +622,9 @@ class _SettingCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(9),
                 decoration: BoxDecoration(
-                  color: iconColor.withOpacity(0.12),
+                  color: iconColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: iconColor.withOpacity(0.25)),
+                  border: Border.all(color: iconColor.withValues(alpha: 0.25)),
                 ),
                 child: Icon(icon, color: iconColor, size: 20),
               ),
@@ -680,16 +680,19 @@ class _BrandFooter extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.08),
+              color: AppColors.primary.withValues(alpha: 0.08),
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.primary.withOpacity(0.25)),
+              border: Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
             ),
-            child: const Icon(
-              Icons.calculate_rounded,
-              color: AppColors.primary,
-              size: 28,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                'assets/icons/logo.png',
+                width: 32,
+                height: 32,
+              ),
             ),
           ),
           const SizedBox(height: 12),
@@ -724,7 +727,7 @@ class _BrandFooter extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.primary.withOpacity(0.5),
+                      color: AppColors.primary.withValues(alpha: 0.5),
                       blurRadius: 4,
                     ),
                   ],

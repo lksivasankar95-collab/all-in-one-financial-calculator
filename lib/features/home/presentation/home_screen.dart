@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
-import '../../../core/constants/app_constants.dart';
 import '../../../core/utils/number_formatter.dart';
 import '../../../shared/models/calculation_history.dart';
 import '../../../shared/providers/calculator_registry.dart';
@@ -155,18 +154,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     ],
                   ),
                   Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.1),
+                      color: AppColors.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: AppColors.primary.withOpacity(0.3),
+                        color: AppColors.primary.withValues(alpha: 0.3),
                       ),
                     ),
-                    child: const Icon(
-                      Icons.calculate_rounded,
-                      color: AppColors.primary,
-                      size: 28,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        'assets/icons/logo.png',
+                        width: 36,
+                        height: 36,
+                      ),
                     ),
                   ),
                 ],
@@ -203,7 +205,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: _isSearching ? AppColors.primary.withOpacity(0.4) : AppColors.border,
+          color: _isSearching ? AppColors.primary.withValues(alpha: 0.4) : AppColors.border,
         ),
       ),
       child: TextField(
@@ -280,7 +282,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionHeader(
+          const _SectionHeader(
             title: 'Favorites',
             icon: Icons.favorite_rounded,
             color: AppColors.error,
@@ -309,7 +311,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionHeader(
+          const _SectionHeader(
             title: 'Recent Calculations',
             icon: Icons.history_rounded,
             color: AppColors.accent,
@@ -434,9 +436,9 @@ class _FavoriteChip extends StatelessWidget {
         width: 120,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: item.color.withOpacity(0.08),
+          color: item.color.withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: item.color.withOpacity(0.25)),
+          border: Border.all(color: item.color.withValues(alpha: 0.25)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -484,7 +486,7 @@ class _RecentHistoryTile extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: cat.color.withOpacity(0.1),
+              color: cat.color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(cat.icon, color: cat.color, size: 16),
@@ -542,16 +544,16 @@ class _CategorySection extends ConsumerWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               decoration: BoxDecoration(
-                color: category.color.withOpacity(0.08),
+                color: category.color.withValues(alpha: 0.08),
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                border: Border.all(color: category.color.withOpacity(0.2)),
+                border: Border.all(color: category.color.withValues(alpha: 0.2)),
               ),
               child: Row(
                 children: [
                   Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                      color: category.color.withOpacity(0.15),
+                      color: category.color.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(category.icon, color: category.color, size: 18),
@@ -581,9 +583,9 @@ class _CategorySection extends ConsumerWidget {
               color: AppColors.card,
               borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
               border: Border(
-                left: BorderSide(color: category.color.withOpacity(0.2)),
-                right: BorderSide(color: category.color.withOpacity(0.2)),
-                bottom: BorderSide(color: category.color.withOpacity(0.2)),
+                left: BorderSide(color: category.color.withValues(alpha: 0.2)),
+                right: BorderSide(color: category.color.withValues(alpha: 0.2)),
+                bottom: BorderSide(color: category.color.withValues(alpha: 0.2)),
               ),
             ),
             child: GridView.builder(
@@ -697,7 +699,7 @@ class _SearchResultTile extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: item.color.withOpacity(0.1),
+                    color: item.color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(item.icon, color: item.color, size: 18),
@@ -728,7 +730,7 @@ class _SearchResultTile extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: item.color.withOpacity(0.1),
+                    color: item.color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(

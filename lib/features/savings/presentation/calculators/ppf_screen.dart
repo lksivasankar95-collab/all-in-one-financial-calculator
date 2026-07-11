@@ -112,15 +112,15 @@ class _PpfScreenState extends CalculatorBaseState<PpfScreen> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.savings.withOpacity(0.08),
+                color: AppColors.savings.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.savings.withOpacity(0.3)),
+                border: Border.all(color: AppColors.savings.withValues(alpha: 0.3)),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(Icons.info_outline_rounded, color: AppColors.savings, size: 18),
-                  const SizedBox(width: 10),
-                  const Expanded(
+                  SizedBox(width: 10),
+                  Expanded(
                     child: Text(
                       'PPF minimum period is 15 years, extendable in blocks of 5 years',
                       style: TextStyle(
@@ -157,9 +157,9 @@ class _PpfScreenState extends CalculatorBaseState<PpfScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: AppColors.warning.withOpacity(0.1),
+                        color: AppColors.warning.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: AppColors.warning.withOpacity(0.4)),
+                        border: Border.all(color: AppColors.warning.withValues(alpha: 0.4)),
                       ),
                       child: Row(
                         children: [
@@ -241,7 +241,7 @@ class _PpfScreenState extends CalculatorBaseState<PpfScreen> {
 
   Widget _buildResultSection(String symbol) {
     final r = _result!;
-    final effectiveInvestment = _yearlyValue.clamp(0, _ppfMaxLimit);
+    final effectiveInvestment = _yearlyValue.clamp(0, _ppfMaxLimit).toDouble();
 
     return AppCard(
       child: Column(
@@ -252,9 +252,9 @@ class _PpfScreenState extends CalculatorBaseState<PpfScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: AppColors.success.withOpacity(0.12),
+              color: AppColors.success.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppColors.success.withOpacity(0.3)),
+              border: Border.all(color: AppColors.success.withValues(alpha: 0.3)),
             ),
             child: const Row(
               mainAxisSize: MainAxisSize.min,

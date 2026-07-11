@@ -110,7 +110,7 @@ class _LoanEligibilityScreenState
     }
 
     // Standard FOIR = 50% of gross income but capped by obligations
-    final double foir = 0.50;
+    const double foir = 0.50;
     final double maxEmiByFoir = income * foir;
     // Actual max EMI = min(FOIR-based, available income after obligations)
     final double maxEmi = maxEmiByFoir > availableIncome
@@ -289,13 +289,13 @@ class _LoanEligibilityScreenState
                   const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               decoration: BoxDecoration(
                 color: eligible
-                    ? AppColors.success.withOpacity(0.12)
-                    : AppColors.error.withOpacity(0.12),
+                    ? AppColors.success.withValues(alpha: 0.12)
+                    : AppColors.error.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(
                   color: eligible
-                      ? AppColors.success.withOpacity(0.5)
-                      : AppColors.error.withOpacity(0.5),
+                      ? AppColors.success.withValues(alpha: 0.5)
+                      : AppColors.error.withValues(alpha: 0.5),
                 ),
               ),
               child: Row(
@@ -405,16 +405,16 @@ class _LoanEligibilityScreenState
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.info.withOpacity(0.06),
+              color: AppColors.info.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppColors.info.withOpacity(0.2)),
+              border: Border.all(color: AppColors.info.withValues(alpha: 0.2)),
             ),
-            child: Row(
+            child: const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.info_outline_rounded,
+                Icon(Icons.info_outline_rounded,
                     size: 16, color: AppColors.info),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     'Based on 50% FOIR (Fixed Obligation to Income Ratio). '

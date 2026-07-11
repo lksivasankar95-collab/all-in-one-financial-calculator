@@ -201,9 +201,9 @@ class _AgeCalculatorScreenState
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.utility.withOpacity(0.08),
+              color: AppColors.utility.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.utility.withOpacity(0.3)),
+              border: Border.all(color: AppColors.utility.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [
@@ -253,9 +253,9 @@ class _AgeCalculatorScreenState
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.06),
+                color: AppColors.primary.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.primary.withOpacity(0.2)),
+                border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
               ),
               child: Row(
                 children: [

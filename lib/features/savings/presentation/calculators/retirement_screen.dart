@@ -152,9 +152,9 @@ class _RetirementScreenState extends CalculatorBaseState<RetirementScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: AppColors.savings.withOpacity(0.06),
+                      color: AppColors.savings.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.savings.withOpacity(0.2)),
+                      border: Border.all(color: AppColors.savings.withValues(alpha: 0.2)),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -284,13 +284,13 @@ class _RetirementScreenState extends CalculatorBaseState<RetirementScreen> {
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
               color: isOnTrack
-                  ? AppColors.success.withOpacity(0.1)
-                  : AppColors.savings.withOpacity(0.1),
+                  ? AppColors.success.withValues(alpha: 0.1)
+                  : AppColors.savings.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: isOnTrack
-                    ? AppColors.success.withOpacity(0.3)
-                    : AppColors.savings.withOpacity(0.3),
+                    ? AppColors.success.withValues(alpha: 0.3)
+                    : AppColors.savings.withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -367,7 +367,7 @@ class _RetirementScreenState extends CalculatorBaseState<RetirementScreen> {
                 child: ResultCard(
                   label: 'Monthly Savings Needed',
                   value: isOnTrack
-                      ? symbol + '0'
+                      ? '${symbol}0'
                       : NumberFormatter.formatCurrency(r.monthlySavingsNeeded, symbol: symbol),
                   valueColor: isOnTrack ? AppColors.success : AppColors.savings,
                 ),

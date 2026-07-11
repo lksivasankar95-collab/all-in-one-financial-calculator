@@ -212,13 +212,13 @@ class _BalanceTransferScreenState
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: AppColors.warning.withOpacity(0.08),
+                          color: AppColors.warning.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                              color: AppColors.warning.withOpacity(0.3)),
+                              color: AppColors.warning.withValues(alpha: 0.3)),
                         ),
-                        child: Row(
-                          children: const [
+                        child: const Row(
+                          children: [
                             Icon(Icons.warning_amber_rounded,
                                 size: 16, color: AppColors.warning),
                             SizedBox(width: 8),
@@ -292,10 +292,10 @@ class _BalanceTransferScreenState
                   icon: Icons.arrow_upward_rounded,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
-                  children: const [
+                  children: [
                     Icon(Icons.arrow_forward_rounded,
                         color: AppColors.textHint, size: 20),
                   ],
@@ -443,9 +443,9 @@ class _BalanceTransferScreenState
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: adviceColor.withOpacity(0.06),
+        color: adviceColor.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: adviceColor.withOpacity(0.25)),
+        border: Border.all(color: adviceColor.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -499,9 +499,9 @@ class _EmiCompareCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.06),
+        color: color.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.25)),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Column(
         children: [

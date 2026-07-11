@@ -364,10 +364,10 @@ class _LumpsumScreenState extends CalculatorBaseState<LumpsumScreen> {
         children: [
           buildSectionTitle('Year-by-Year Growth'),
           const SizedBox(height: 8),
-          Row(
+          const Row(
             children: [
               _LegendDot(color: AppColors.border, label: 'Principal'),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               _LegendDot(color: AppColors.primary, label: 'Value'),
             ],
           ),
@@ -442,7 +442,7 @@ class _LumpsumScreenState extends CalculatorBaseState<LumpsumScreen> {
                   show: true,
                   drawVerticalLine: false,
                   horizontalInterval: maxVal / 4,
-                  getDrawingHorizontalLine: (_) => FlLine(
+                  getDrawingHorizontalLine: (_) => const FlLine(
                     color: AppColors.border,
                     strokeWidth: 0.5,
                   ),

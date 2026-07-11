@@ -28,7 +28,7 @@ class AppCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final radius = borderRadius ?? AppConstants.radiusLarge;
     final effectiveBorderColor = hasNeonBorder
-        ? AppColors.primary.withOpacity(0.4)
+        ? AppColors.primary.withValues(alpha: 0.4)
         : (borderColor ?? AppColors.border);
 
     return Material(
@@ -77,10 +77,10 @@ class GlassCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppConstants.radiusLarge),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.card.withOpacity(0.8),
+            color: AppColors.card.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(AppConstants.radiusLarge),
             border: Border.all(
-              color: (accentColor ?? AppColors.primary).withOpacity(0.2),
+              color: (accentColor ?? AppColors.primary).withValues(alpha: 0.2),
             ),
             gradient: const LinearGradient(
               begin: Alignment.topLeft,

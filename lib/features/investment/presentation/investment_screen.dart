@@ -67,16 +67,16 @@ class InvestmentScreen extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.investment.withOpacity(0.06),
+        color: AppColors.investment.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.investment.withOpacity(0.18)),
+        border: Border.all(color: AppColors.investment.withValues(alpha: 0.18)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: AppColors.investment.withOpacity(0.12),
+              color: AppColors.investment.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(
@@ -86,11 +86,11 @@ class InvestmentScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 14),
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Investment Calculators',
                   style: TextStyle(
                     fontSize: 16,
@@ -98,9 +98,9 @@ class InvestmentScreen extends StatelessWidget {
                     color: AppColors.textPrimary,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
-                  'SIP, SWP, Lumpsum, CAGR, ROI & more',
+                  'SIP, XIRR, Future Value, DCA & more',
                   style: TextStyle(
                     fontSize: 12,
                     color: AppColors.textHint,
@@ -142,9 +142,9 @@ class _CalculatorCard extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: item.color.withOpacity(0.12),
+                  color: item.color.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: item.color.withOpacity(0.25)),
+                  border: Border.all(color: item.color.withValues(alpha: 0.25)),
                 ),
                 child: Icon(item.icon, color: item.color, size: 22),
               ),
