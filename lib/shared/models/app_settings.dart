@@ -5,28 +5,24 @@ part 'app_settings.g.dart';
 @HiveType(typeId: 1)
 class AppSettings extends HiveObject {
   @HiveField(0)
-  bool biometricEnabled;
-
-  @HiveField(1)
   String currency;
 
-  @HiveField(2)
+  @HiveField(1)
   String currencySymbol;
 
-  @HiveField(3)
+  @HiveField(2)
   int maxHistory;
 
-  @HiveField(4)
+  @HiveField(3)
   bool hapticFeedback;
 
-  @HiveField(5)
+  @HiveField(4)
   bool showCalculationChart;
 
-  @HiveField(6)
+  @HiveField(5)
   String language;
 
   AppSettings({
-    this.biometricEnabled = false,
     this.currency = 'INR',
     this.currencySymbol = '₹',
     this.maxHistory = 100,
@@ -36,7 +32,6 @@ class AppSettings extends HiveObject {
   });
 
   AppSettings copyWith({
-    bool? biometricEnabled,
     String? currency,
     String? currencySymbol,
     int? maxHistory,
@@ -45,7 +40,6 @@ class AppSettings extends HiveObject {
     String? language,
   }) {
     return AppSettings(
-      biometricEnabled: biometricEnabled ?? this.biometricEnabled,
       currency: currency ?? this.currency,
       currencySymbol: currencySymbol ?? this.currencySymbol,
       maxHistory: maxHistory ?? this.maxHistory,

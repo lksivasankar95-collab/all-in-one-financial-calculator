@@ -11,11 +11,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = HiveDatabase.getSettings();
   }
 
-  Future<void> setBiometric(bool enabled) async {
-    state = state.copyWith(biometricEnabled: enabled);
-    await HiveDatabase.saveSettings(state);
-  }
-
   Future<void> setCurrency(String currency, String symbol) async {
     state = state.copyWith(currency: currency, currencySymbol: symbol);
     await HiveDatabase.saveSettings(state);

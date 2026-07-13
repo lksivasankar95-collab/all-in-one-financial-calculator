@@ -205,7 +205,7 @@ class _ConstructionCostScreenState extends CalculatorBaseState<ConstructionCostS
             items: [
               ResultItem(label: 'Built-up Area', value: '${_areaValue.toStringAsFixed(0)} sqft'),
               ResultItem(label: 'Base Rate', value: NumberFormatter.formatCurrency(_ratePerSqft, symbol: symbol)),
-              ResultItem(label: 'Quality Factor', value: '${_quality} (${_qualityFactor}x)'),
+              ResultItem(label: 'Quality Factor', value: '$_quality (${_qualityFactor}x)'),
               ResultItem(label: 'Base Cost', value: NumberFormatter.formatCurrency(r.baseCost, symbol: symbol)),
               ResultItem(label: 'Quality Adjustment', value: '+${NumberFormatter.formatCurrency(r.totalCost - r.baseCost, symbol: symbol)}'),
               ResultItem(label: 'Total Cost', value: NumberFormatter.formatCurrency(r.totalCost, symbol: symbol), isHighlighted: true, color: AppColors.realEstate),

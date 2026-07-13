@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:local_auth/local_auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../shared/providers/settings_provider.dart';
@@ -15,36 +14,6 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-  final LocalAuthentication _localAuth = LocalAuthentication();
-  bool _biometricsAvailable = false;
-  bool _biometricsChecked = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _checkBiometrics();
-  }
-
-  Future<void> _checkBiometrics() async {
-    try {
-      final canCheck = await _localAuth.canCheckBiometrics;
-      final isDeviceSupported = await _localAuth.isDeviceSupported();
-      if (mounted) {
-        setState(() {
-          _biometricsAvailable = canCheck && isDeviceSupported;
-          _biometricsChecked = true;
-        });
-      }
-    } on PlatformException {
-      if (mounted) {
-        setState(() {
-          _biometricsAvailable = false;
-          _biometricsChecked = true;
-        });
-      }
-    }
-  }
-
   // ── Currency Dialog ────────────────────────────────────────────────────────
 
   void _showCurrencyDialog(String currentCode) {
@@ -297,6 +266,42 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
+  Future<void> _launchPrivacyPolicy() async {
+    final uri = Uri.parse(
+        'https://sites.google.com/view/all-in-one-calculator-shyblack/home');
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Could not open Privacy Policy'),
+              backgroundColor: AppColors.error,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          );
+        }
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Could not open Privacy Policy'),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        );
+      }
+    }
+  }
+
   // ── Build ──────────────────────────────────────────────────────────────────
 
   @override
@@ -365,42 +370,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               size: 20,
             ),
             onTap: () => _showCurrencyDialog(settings.currency),
-          ),
-
-          // ── SECURITY ───────────────────────────────────────────────────────
-          const SizedBox(height: 24),
-          const _SectionHeader(title: 'Security'),
-          const SizedBox(height: 10),
-          _SettingCard(
-            icon: Icons.fingerprint_rounded,
-            iconColor: AppColors.investment,
-            title: 'Biometric Lock',
-            subtitle: _biometricsChecked
-                ? (_biometricsAvailable
-                    ? 'Lock app with fingerprint or face'
-                    : 'Not available on this device')
-                : 'Checking availability...',
-            trailing: _biometricsChecked
-                ? Switch(
-                    value: _biometricsAvailable && settings.biometricEnabled,
-                    onChanged: _biometricsAvailable
-                        ? (val) => ref
-                            .read(settingsProvider.notifier)
-                            .setBiometric(val)
-                        : null,
-                    activeThumbColor: AppColors.primary,
-                    activeTrackColor: AppColors.primary.withValues(alpha: 0.25),
-                    inactiveThumbColor: AppColors.textHint,
-                    inactiveTrackColor: AppColors.border,
-                  )
-                : const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: AppColors.textHint,
-                    ),
-                  ),
           ),
 
           // ── CALCULATIONS ───────────────────────────────────────────────────
@@ -531,6 +500,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             iconColor: AppColors.primary,
             title: 'App Name',
             subtitle: 'ShyBlack Financial Calculator',
+          ),
+          const SizedBox(height: 8),
+          _SettingCard(
+            icon: Icons.privacy_tip_rounded,
+            iconColor: AppColors.primary,
+            title: 'Privacy Policy',
+            subtitle: 'View our privacy policy',
+            trailing: const Icon(
+              Icons.open_in_new_rounded,
+              color: AppColors.textHint,
+              size: 18,
+            ),
+            onTap: _launchPrivacyPolicy,
           ),
           const SizedBox(height: 20),
           // Brand footer

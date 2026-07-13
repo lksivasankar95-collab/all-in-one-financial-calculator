@@ -391,8 +391,8 @@ class _DepreciationScreenState extends CalculatorBaseState<DepreciationScreen> {
         children: [
           buildSectionTitle('Year-by-Year Comparison'),
           const SizedBox(height: 8),
-          Row(
-            children: const [
+          const Row(
+            children: [
               SizedBox(
                   width: 36,
                   child: Text('Yr',

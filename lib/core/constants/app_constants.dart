@@ -17,7 +17,6 @@ class AppConstants {
   static const int favoriteTypeId = 2;
 
   // Settings Keys
-  static const String keyBiometricEnabled = 'biometric_enabled';
   static const String keyThemeMode = 'theme_mode';
   static const String keyCurrency = 'currency';
   static const String keyLanguage = 'language';
