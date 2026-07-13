@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_colors.dart';
@@ -290,7 +289,7 @@ class _PercentageDifferenceScreenState
                 label: 'Average ( (V1+V2)/2 )',
                 value: NumberFormatter.formatNumber(r.average),
               ),
-              ResultItem(
+              const ResultItem(
                 label: 'Formula',
                 value: '|V1-V2| / ((V1+V2)/2) × 100',
               ),

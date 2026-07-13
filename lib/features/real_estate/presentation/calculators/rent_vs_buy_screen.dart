@@ -304,7 +304,7 @@ class _RentVsBuyScreenState extends CalculatorBaseState<RentVsBuyScreen> {
                 const TextStyle(color: AppColors.textPrimary, fontSize: 11)),
             )),
             titlesData: FlTitlesData(
-              leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
               bottomTitles: AxisTitles(sideTitles: SideTitles(
                 showTitles: true, getTitlesWidget: (v, m) {
                   final labels = ['Buy Total', 'Buy Net', 'Rent'];
@@ -317,7 +317,7 @@ class _RentVsBuyScreenState extends CalculatorBaseState<RentVsBuyScreen> {
               rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
               topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
             ),
-            gridData: FlGridData(show: false),
+            gridData: const FlGridData(show: false),
             borderData: FlBorderData(show: false),
             barGroups: [
               BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: r.totalBuyCost, color: AppColors.realEstate, width: 14, borderRadius: const BorderRadius.vertical(top: Radius.circular(4)))]),

@@ -126,17 +126,15 @@ class _AprVsApyScreenState extends CalculatorBaseState<AprVsApyScreen> {
 
   void _calculate() {
     if (!_formKey.currentState!.validate()) return;
-    final principal = _principalValue;
-    final years = _yearsValue;
 
     final double r = _nominalRate / 100;
     final int n = _selectedFrequency.periods;
 
-    final double apy = (pow(1 + r / n, n) - 1) * 100;
+    final double apy = ((pow(1 + r / n, n) - 1) * 100).toDouble();
     final double difference = apy - _nominalRate;
 
     final frequencies = _frequencies.map((f) {
-      final eff = (pow(1 + r / f.periods, f.periods) - 1) * 100;
+      final eff = ((pow(1 + r / f.periods, f.periods) - 1) * 100).toDouble();
       return _FrequencyRow(
         label: f.label,
         periods: f.periods,

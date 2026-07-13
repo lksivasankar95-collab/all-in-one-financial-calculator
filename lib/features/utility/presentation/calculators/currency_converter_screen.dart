@@ -7,8 +7,6 @@ import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/calculator_base_screen.dart';
 import '../../../../core/widgets/result_card.dart';
-import '../../../../shared/providers/settings_provider.dart';
-
 class CurrencyConverterScreen extends CalculatorBaseScreen {
   const CurrencyConverterScreen({super.key})
       : super(

@@ -153,7 +153,7 @@ class _AnnuityCalculatorScreenState extends CalculatorBaseState<AnnuityCalculato
 
   Widget _buildResultSection(String symbol) {
     final r = _result!;
-    final effectiveReturn = _corpusValue > 0 ? (r.totalPayout / _corpusValue - 1) * 100 : 0;
+    final double effectiveReturn = _corpusValue > 0 ? ((r.totalPayout / _corpusValue - 1) * 100).toDouble() : 0.0;
 
     return AppCard(
       child: Column(

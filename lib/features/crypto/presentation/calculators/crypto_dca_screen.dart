@@ -7,7 +7,6 @@ import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/calculator_base_screen.dart';
 import '../../../../core/widgets/result_card.dart';
-import '../../../../shared/providers/settings_provider.dart';
 import '../../domain/crypto_calculators.dart';
 
 class CryptoDcaScreen extends CalculatorBaseScreen {
@@ -42,7 +41,6 @@ class _CryptoDcaScreenState extends CalculatorBaseState<CryptoDcaScreen> {
   @override
   bool get hasResult => _result != null;
 
-  String get _symbol => ref.read(currencySymbolProvider);
   double get _investmentValue => NumberFormatter.tryParse(_investmentController.text) ?? 0;
   double get _startValue => NumberFormatter.tryParse(_startController.text) ?? 0;
   double get _endValue => NumberFormatter.tryParse(_endController.text) ?? 0;

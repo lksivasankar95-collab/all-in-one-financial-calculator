@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:shy_calculator/app.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:shy_calculator/core/constants/app_colors.dart';
 import 'package:shy_calculator/core/constants/app_constants.dart';
 import 'package:shy_calculator/shared/models/calculation_history.dart';
@@ -11,28 +10,36 @@ import 'package:shy_calculator/features/investment/domain/investment_calculators
 import 'package:shy_calculator/features/loan/domain/loan_calculators.dart';
 import 'package:shy_calculator/shared/models/calculator_item.dart';
 import 'package:shy_calculator/shared/providers/calculator_registry.dart';
+import 'package:shy_calculator/core/theme/app_theme.dart';
 
 void main() {
   group('App', () {
-    testWidgets('renders without crashing', (tester) async {
-      Hive.initFlutter();
-      Hive.registerAdapter(CalculationHistoryAdapter());
-      Hive.registerAdapter(AppSettingsAdapter());
+    setUp(() async {
+      Hive.init('test/tmp');
+      if (!Hive.isAdapterRegistered(0)) {
+        Hive.registerAdapter(CalculationHistoryAdapter());
+      }
+      if (!Hive.isAdapterRegistered(1)) {
+        Hive.registerAdapter(AppSettingsAdapter());
+      }
       await Hive.openBox<CalculationHistory>('calculation_history');
       await Hive.openBox<AppSettings>('settings');
       await Hive.openBox<String>('favorites');
+    });
+
+    tearDown(() async {
+      await Hive.deleteBoxFromDisk('calculation_history');
+      await Hive.deleteBoxFromDisk('settings');
+      await Hive.deleteBoxFromDisk('favorites');
+    });
+
+    testWidgets('renders without crashing', (tester) async {
       await tester.pumpWidget(const _TestApp());
       await tester.pump();
       expect(find.byType(MaterialApp), findsOneWidget);
     });
 
     testWidgets('has dark theme', (tester) async {
-      Hive.initFlutter();
-      Hive.registerAdapter(CalculationHistoryAdapter());
-      Hive.registerAdapter(AppSettingsAdapter());
-      await Hive.openBox<CalculationHistory>('calculation_history');
-      await Hive.openBox<AppSettings>('settings');
-      await Hive.openBox<String>('favorites');
       await tester.pumpWidget(const _TestApp());
       await tester.pump();
       final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
@@ -70,8 +77,8 @@ void main() {
   });
 
   group('CalculatorRegistry', () {
-    test('has 6 categories', () {
-      expect(CalculatorRegistry.categories.length, 6);
+    test('has 12 categories', () {
+      expect(CalculatorRegistry.categories.length, 12);
     });
 
     test('has all calculators by category', () {
@@ -239,4 +246,18 @@ void main() {
       expect(result.monthsSaved, greaterThan(0));
     });
   });
+}
+
+class _TestApp extends StatelessWidget {
+  const _TestApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'ShyBlack Calculator Test',
+      theme: AppTheme.darkTheme,
+      themeMode: ThemeMode.dark,
+      home: const SizedBox(),
+    );
+  }
 }

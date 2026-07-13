@@ -39,7 +39,6 @@ class _MonthlyBudgetScreenState extends CalculatorBaseState<MonthlyBudgetScreen>
   };
 
   BudgetResult? _result;
-  int _touchedIndex = -1;
 
   @override
   void dispose() {
@@ -207,7 +206,7 @@ class _MonthlyBudgetScreenState extends CalculatorBaseState<MonthlyBudgetScreen>
           ],
         ),
         const SizedBox(height: 4),
-        Text('${NumberFormatter.formatCurrency(allocated, symbol: symbol)}',
+        Text(NumberFormatter.formatCurrency(allocated, symbol: symbol),
             style: const TextStyle(fontSize: 11, color: AppColors.banking)),
         AppTextField(
           label: 'Actual Spent',
@@ -328,11 +327,11 @@ class _MonthlyBudgetScreenState extends CalculatorBaseState<MonthlyBudgetScreen>
                       );
                     },
                   )),
-                  leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                 ),
-                gridData: FlGridData(show: false),
+                gridData: const FlGridData(show: false),
                 borderData: FlBorderData(show: false),
                 barGroups: List.generate(categories.length, (i) {
                   final cat = categories[i];

@@ -231,7 +231,7 @@ class _WithdrawalCalculatorScreenState extends CalculatorBaseState<WithdrawalCal
             items: [
               ResultItem(label: 'Corpus', value: NumberFormatter.formatCurrency(_corpusValue, symbol: symbol)),
               ResultItem(label: 'Annual Withdrawal', value: NumberFormatter.formatCurrency(_annualWithdrawal, symbol: symbol)),
-              ResultItem(label: 'Safe Withdrawal Rate', value: '4.00% (recommended)'),
+              const ResultItem(label: 'Safe Withdrawal Rate', value: '4.00% (recommended)'),
               ResultItem(label: 'Your Rate', value: NumberFormatter.formatPercent(_withdrawalPercent),
                   color: _withdrawalPercent <= 4 ? AppColors.success : AppColors.warning),
               ResultItem(label: 'Remaining After $_years yrs', value: NumberFormatter.formatCurrency(r.remainingCorpus, symbol: symbol),

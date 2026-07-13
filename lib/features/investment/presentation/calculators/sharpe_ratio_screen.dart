@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_colors.dart';
@@ -8,7 +7,6 @@ import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/calculator_base_screen.dart';
 import '../../../../core/widgets/result_card.dart';
-import '../../../../shared/providers/settings_provider.dart';
 
 class SharpeRatioScreen extends CalculatorBaseScreen {
   const SharpeRatioScreen({super.key})
@@ -60,7 +58,6 @@ class _SharpeRatioScreenState extends CalculatorBaseState<SharpeRatioScreen> {
       ? ''
       : 'Sharpe Ratio: ${_sharpeRatio!.toStringAsFixed(2)} - $_interpretation';
 
-  String get _symbol => ref.read(currencySymbolProvider);
   double get _portfolioReturnValue =>
       NumberFormatter.tryParse(_portfolioReturnController.text) ?? 0;
 

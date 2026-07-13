@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_colors.dart';
@@ -49,7 +48,6 @@ class _BrokerageCalculatorScreenState extends CalculatorBaseState<BrokerageCalcu
   double get _buyValue => NumberFormatter.tryParse(_buyController.text) ?? 0;
   double get _sellValue => NumberFormatter.tryParse(_sellController.text) ?? 0;
   int get _qtyValue => (NumberFormatter.tryParse(_qtyController.text) ?? 0).toInt();
-  double get _turnover => (_buyValue + _sellValue) * _qtyValue;
 
   @override
   Map<String, dynamic> get currentInputs => {

@@ -7,7 +7,6 @@ import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/calculator_base_screen.dart';
 import '../../../../core/widgets/result_card.dart';
-import '../../../../shared/providers/settings_provider.dart';
 import '../../domain/crypto_calculators.dart';
 
 class CryptoPositionSizeScreen extends CalculatorBaseScreen {
@@ -40,7 +39,6 @@ class _CryptoPositionSizeScreenState extends CalculatorBaseState<CryptoPositionS
   @override
   bool get hasResult => _result != null;
 
-  String get _symbol => ref.read(currencySymbolProvider);
   double get _portfolioValue => NumberFormatter.tryParse(_portfolioController.text) ?? 0;
   double get _entryValue => NumberFormatter.tryParse(_entryController.text) ?? 0;
 

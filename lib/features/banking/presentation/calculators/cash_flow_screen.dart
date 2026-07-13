@@ -184,7 +184,7 @@ class _CashFlowScreenState extends CalculatorBaseState<CashFlowScreen> {
             _buildQuickSummary(symbol, cashFlow, isSurplus, savingsRate, expenseRatio),
             if (_result != null) ...[
               const SizedBox(height: 16),
-              _buildResultSection(symbol, savingsRate, expenseRatio),
+              _buildResultSection(symbol, savingsRate, expenseRatio, isSurplus),
               const SizedBox(height: 16),
               _buildPieChart(),
             ],
@@ -228,7 +228,7 @@ class _CashFlowScreenState extends CalculatorBaseState<CashFlowScreen> {
     );
   }
 
-  Widget _buildResultSection(String symbol, double savingsRate, double expenseRatio) {
+  Widget _buildResultSection(String symbol, double savingsRate, double expenseRatio, bool isSurplus) {
     return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

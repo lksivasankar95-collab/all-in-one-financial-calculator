@@ -48,7 +48,7 @@ import '../../features/savings/presentation/calculators/rd_screen.dart';
 import '../../features/savings/presentation/calculators/ppf_screen.dart';
 import '../../features/savings/presentation/calculators/epf_screen.dart';
 import '../../features/savings/presentation/calculators/nps_screen.dart';
-import '../../features/savings/presentation/calculators/retirement_screen.dart';
+import '../../features/savings/presentation/calculators/retirement_screen.dart' as savings_calc;
 import '../../features/savings/presentation/calculators/emergency_fund_screen.dart';
 import '../../features/savings/presentation/calculators/goal_savings_screen.dart';
 import '../../features/savings/presentation/calculators/monthly_savings_screen.dart';
@@ -354,7 +354,7 @@ final appRouter = GoRouter(
         GoRoute(path: 'ppf', pageBuilder: (c, s) => _slide(const PpfScreen())),
         GoRoute(path: 'epf', pageBuilder: (c, s) => _slide(const EpfScreen())),
         GoRoute(path: 'nps', pageBuilder: (c, s) => _slide(const NpsScreen())),
-        GoRoute(path: 'retirement', pageBuilder: (c, s) => _slide(const RetirementScreen())),
+        GoRoute(path: 'retirement', pageBuilder: (c, s) => _slide(const savings_calc.RetirementScreen())),
         GoRoute(path: 'emergency-fund', pageBuilder: (c, s) => _slide(const EmergencyFundScreen())),
         GoRoute(path: 'goal-savings', pageBuilder: (c, s) => _slide(const GoalSavingsScreen())),
         GoRoute(path: 'monthly-savings', pageBuilder: (c, s) => _slide(const MonthlySavingsScreen())),

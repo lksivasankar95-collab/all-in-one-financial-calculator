@@ -343,8 +343,6 @@ class _NetWorthScreenState extends CalculatorBaseState<NetWorthScreen> {
 
   Widget _buildPieChart() {
     final r = _result!;
-    final totalAssets = r.totalAssets > 0 ? r.totalAssets : 1;
-    final totalLiabilities = r.totalLiabilities > 0 ? r.totalLiabilities : 1;
 
     return AppCard(
       child: Column(
@@ -376,7 +374,7 @@ class _NetWorthScreenState extends CalculatorBaseState<NetWorthScreen> {
                       ),
                       sections: [
                         PieChartSectionData(
-                          value: r.assets.fold(0.0, (s, a) => s + a.amount),
+                          value: r.assets.fold<double>(0.0, (s, a) => s + a.amount),
                           color: AppColors.success,
                           title: _touchedIndex == 0 ? 'Assets' : '',
                           radius: _touchedIndex == 0 ? 60 : 52,
@@ -387,7 +385,7 @@ class _NetWorthScreenState extends CalculatorBaseState<NetWorthScreen> {
                           ),
                         ),
                         PieChartSectionData(
-                          value: r.liabilities.fold(0.0, (s, l) => s + l.amount),
+                          value: r.liabilities.fold<double>(0.0, (s, l) => s + l.amount),
                           color: AppColors.error.withValues(alpha: 0.75),
                           title: _touchedIndex == 1 ? 'Liabilities' : '',
                           radius: _touchedIndex == 1 ? 60 : 52,

@@ -91,7 +91,7 @@ class _InsuranceNeedScreenState extends CalculatorBaseState<InsuranceNeedScreen>
   Widget build(BuildContext context) {
     final symbol = ref.watch(currencySymbolProvider);
     final gap = _result != null
-        ? (_result!.recommendedCoverage - _coverageValue).clamp(0, double.infinity)
+        ? (_result!.recommendedCoverage - _coverageValue).clamp(0.0, double.infinity)
         : 0.0;
 
     return buildCalculatorScaffold(
@@ -225,7 +225,7 @@ class _InsuranceNeedScreenState extends CalculatorBaseState<InsuranceNeedScreen>
             ),
           ] else ...[
             const SizedBox(height: 10),
-            ResultCard(
+            const ResultCard(
               label: 'Coverage Gap',
               value: 'No gap - adequately covered!',
               isHighlighted: true,

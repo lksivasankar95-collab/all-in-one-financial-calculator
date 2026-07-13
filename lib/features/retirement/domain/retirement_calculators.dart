@@ -13,8 +13,8 @@ class RetirementCalculators {
     required double inflationRate,
     required double swr,
   }) {
-    final double yearsToRetirement = retirementAge - currentAge;
-    final double yearsInRetirement = 85 - retirementAge;
+    final double yearsToRetirement = (retirementAge - currentAge).toDouble();
+    final double yearsInRetirement = (85 - retirementAge).toDouble();
 
     final double inflatedExpense =
         monthlyExpense * pow(1 + inflationRate / 100, yearsToRetirement);
@@ -84,8 +84,8 @@ class RetirementCalculators {
     required double returnRate,
     required double currentSavings,
   }) {
-    final double yearsToRetirement = retirementAge - currentAge;
-    final double yearsInRetirement = lifeExpectancy - retirementAge;
+    final double yearsToRetirement = (retirementAge - currentAge).toDouble();
+    final double yearsInRetirement = (lifeExpectancy - retirementAge).toDouble();
 
     final double inflatedExpense =
         monthlyExpense * pow(1 + inflation / 100, yearsToRetirement);

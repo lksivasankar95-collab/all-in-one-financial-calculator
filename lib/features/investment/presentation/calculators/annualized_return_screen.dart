@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:math' show pow;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_colors.dart';
@@ -59,7 +59,7 @@ class _AnnualizedReturnScreenState
           'Annualized Return':
               NumberFormatter.formatPercent(_annualizedReturn!),
           'Total Return': NumberFormatter.formatPercent(_totalReturn!),
-          'Growth Factor': _growthFactor!.toStringAsFixed(2) + 'x',
+          'Growth Factor': '${_growthFactor!.toStringAsFixed(2)}x',
         };
 
   @override
@@ -80,7 +80,7 @@ class _AnnualizedReturnScreenState
     final finalVal = _finalValue;
     if (initial <= 0 || finalVal <= 0 || _years <= 0) return;
 
-    final annualized = (pow(finalVal / initial, 1 / _years) - 1) * 100;
+    final annualized = ((pow(finalVal / initial, 1 / _years) - 1) * 100).toDouble();
     final totalRet = ((finalVal - initial) / initial) * 100;
     final growth = finalVal / initial;
 

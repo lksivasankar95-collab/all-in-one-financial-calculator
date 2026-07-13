@@ -9,7 +9,6 @@ import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/calculator_base_screen.dart';
 import '../../../../core/widgets/result_card.dart';
 import '../../../../shared/providers/settings_provider.dart';
-import '../../domain/investment_calculators.dart';
 
 class SipVsLumpsumScreen extends CalculatorBaseScreen {
   const SipVsLumpsumScreen({super.key})
@@ -64,8 +63,7 @@ class _SipVsLumpsumScreenState extends CalculatorBaseState<SipVsLumpsumScreen> {
   String get resultSummary => _lumpsumValue == null
       ? ''
       : 'SIP vs Lumpsum: Lumpsum=${NumberFormatter.formatCurrency(_lumpsumValue!, symbol: _symbol)} | '
-          'SIP=${NumberFormatter.formatCurrency(_sipValue!, symbol: _symbol)} | '
-          '${_recommendation}';
+          'SIP=${NumberFormatter.formatCurrency(_sipValue!, symbol: _symbol)} | $_recommendation';
 
   String get _symbol => ref.read(currencySymbolProvider);
   double get _totalAmount =>

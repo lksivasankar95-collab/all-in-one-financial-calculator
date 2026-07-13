@@ -5,9 +5,9 @@ class BankingCalculators {
     required List<AssetItem> assets,
     required List<LiabilityItem> liabilities,
   }) {
-    final double totalAssets = assets.fold(0, (sum, a) => sum + a.amount);
+    final double totalAssets = assets.fold<double>(0.0, (sum, a) => sum + a.amount);
     final double totalLiabilities =
-        liabilities.fold(0, (sum, l) => sum + l.amount);
+        liabilities.fold<double>(0.0, (sum, l) => sum + l.amount);
     final double netWorth = totalAssets - totalLiabilities;
     return NetWorthResult(
       netWorth: netWorth,
@@ -78,7 +78,7 @@ class BankingCalculators {
     required List<BudgetCategory> categories,
   }) {
     final double totalExpenses =
-        categories.fold(0, (sum, c) => sum + c.amount);
+        categories.fold<double>(0.0, (sum, c) => sum + c.amount);
     final double surplus = income - totalExpenses;
     return BudgetResult(
       totalIncome: income,

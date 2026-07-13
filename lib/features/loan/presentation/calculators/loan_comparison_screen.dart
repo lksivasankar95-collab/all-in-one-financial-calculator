@@ -26,13 +26,11 @@ class LoanComparisonScreen extends CalculatorBaseScreen {
 
 class _LoanOption {
   final TextEditingController processingFeeController;
-  double rate;
-  int tenureYears;
+  double rate = 8.0;
+  int tenureYears = 20;
 
   _LoanOption({
     required this.processingFeeController,
-    this.rate = 8.0,
-    this.tenureYears = 20,
   });
 }
 

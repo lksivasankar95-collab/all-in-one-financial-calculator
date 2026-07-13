@@ -177,7 +177,7 @@ class _CarInsuranceScreenState extends CalculatorBaseState<CarInsuranceScreen> {
   Widget _buildResultSection(String symbol) {
     final premium = _totalPremium!;
     final idv = _idv!;
-    final savings = _noClaimBonus > 0 ? premium * _noClaimBonus / 100 : 0;
+    final savings = _noClaimBonus > 0 ? premium * _noClaimBonus / 100 : 0.0;
     final ownDamage = premium * 0.65;
     final thirdParty = premium * 0.35;
 

@@ -264,7 +264,7 @@ class _RetirementCorpusScreenState extends CalculatorBaseState<RetirementCorpusS
             ),
           ] else ...[
             const SizedBox(height: 10),
-            ResultCard(
+            const ResultCard(
               label: 'Shortfall',
               value: 'No shortfall - you are on track!',
               isHighlighted: true,
